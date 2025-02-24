@@ -1,0 +1,25 @@
+{
+  "name": "gr11-hb03-expressmongoose-api",
+  "version": "1.0.0",
+  "description": "## Descripción Este proyecto es una API REST desarrollada con Node.js utilizando Express.js como framework para la gestión de rutas y Mongoose como ODM para la interacción con MongoDB. Forma parte de la práctica del grupo **GR11** en el módulo **HB03**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edurobrus/GR11-HB03-ExpressMongoose-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edurobrus/GR11-HB03-ExpressMongoose-API/issues"
+  },
+  "homepage": "https://github.com/edurobrus/GR11-HB03-ExpressMongoose-API#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.1"
+  }
+}
