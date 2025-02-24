@@ -48,9 +48,9 @@ GR11-HB03-ExpressMongoose-API/
 ├── routes/
 │   └── itemRoutes.js
 ├── data/
-│   └── items.csv  # Archivo CSV con los datos de prueba
+│   └── items.csv
 ├── scripts/
-│   └── importData.js  # Script para importar datos
+│   └── importData.js
 ├── index.js
 ├── .env
 ├── package.json
