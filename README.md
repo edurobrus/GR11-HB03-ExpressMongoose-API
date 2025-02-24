@@ -34,6 +34,49 @@ npm start
 ```
 El servidor se iniciará en `http://localhost:3000`
 
+---
+
+## 📂 Estructura del Proyecto
+```
+GR11-HB03-ExpressMongoose-API/
+├── config/
+│   └── db.js
+├── controllers/
+│   └── itemController.js
+├── models/
+│   └── Item.js
+├── routes/
+│   └── itemRoutes.js
+├── data/
+│   └── items.csv  # Archivo CSV con los datos de prueba
+├── scripts/
+│   └── importData.js  # Script para importar datos
+├── index.js
+├── .env
+├── package.json
+└── .gitignore
+```
+
+---
+
+## Importar Datos de Prueba
+
+### 1. Ejecutar la Importación
+Corre el siguiente comando para importar los datos a MongoDB:
+```bash
+node scripts/importData.js
+```
+Esto leerá el archivo CSV y lo guardará en la base de datos.
+
+### 2. Verificar que los Datos se Cargaron
+Puedes hacer una petición **GET** a la API:
+```bash
+curl -X GET http://localhost:3000/api/items
+```
+O usar **Postman** para ver los ítems en la base de datos.
+
+---
+
 ## Endpoints principales
 | Método | Endpoint       | Descripción               |
 |--------|--------------|---------------------------|
@@ -43,9 +86,14 @@ El servidor se iniciará en `http://localhost:3000`
 | PUT    | `/api/items/:id` | Actualiza un ítem por ID |
 | DELETE | `/api/items/:id` | Elimina un ítem por ID   |
 
+---
+
 ## Contribución
 1. Haz un fork del repositorio.
 2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
 3. Realiza cambios y haz commit (`git commit -m 'Agrega nueva funcionalidad'`).
 4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
 5. Abre un Pull Request.
+
+---
+
