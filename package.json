@@ -22,6 +22,9 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
-    "mongoose": "^8.10.1"
+    "gr11-hb03-expressmongoose-api": "file:",
+    "mongoose": "^8.10.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
