@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000", // Asegúrate de que coincide con tu configuración
+        url: "http://localhost:3000",
       },
     ],
   },

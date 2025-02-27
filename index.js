@@ -21,9 +21,9 @@ app.get("/", (req, res) => {
   res.send("API REST con Node, Express y Mongoose");
 });
 
-// Uso de rutas para el modelo Item
-const itemRoutes = require("./routes/itemRoutes");
-app.use("/api/items", itemRoutes);
+// Uso de rutas para el modelo Restaurant
+const restaurantRoutes = require("./routes/restaurantRoutes");
+app.use("/api/restaurants", restaurantRoutes);
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;

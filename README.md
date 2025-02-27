@@ -42,13 +42,13 @@ GR11-HB03-ExpressMongoose-API/
 ├── config/
 │   └── db.js
 ├── controllers/
-│   └── itemController.js
+│   └── restaurantController.js
 ├── models/
-│   └── Item.js
+│   └── Restaurant.js
 ├── routes/
-│   └── itemRoutes.js
+│   └── restaurantRoutes.js
 ├── data/
-│   └── items.csv
+│   └── Restaurants.csv
 ├── scripts/
 │   └── importData.js
 ├── index.js
@@ -71,20 +71,20 @@ Esto leerá el archivo CSV y lo guardará en la base de datos.
 ### 2. Verificar que los Datos se Cargaron
 Puedes hacer una petición **GET** a la API:
 ```bash
-curl -X GET http://localhost:3000/api/items
+curl -X GET http://localhost:3000/api/restaurants
 ```
-O usar **Postman** para ver los ítems en la base de datos.
+O usar **Postman** para ver los restaurantes en la base de datos.
 
 ---
 
 ## Endpoints principales
 | Método | Endpoint       | Descripción               |
 |--------|--------------|---------------------------|
-| GET    | `/api/items`  | Obtiene todos los ítems   |
-| POST   | `/api/items`  | Crea un nuevo ítem        |
-| GET    | `/api/items/:id` | Obtiene un ítem por ID   |
-| PUT    | `/api/items/:id` | Actualiza un ítem por ID |
-| DELETE | `/api/items/:id` | Elimina un ítem por ID   |
+| GET    | `/api/restaurants`  | Obtiene todos los restaurantes   |
+| POST   | `/api/restaurants`  | Crea un nuevo restaurante        |
+| GET    | `/api/restaurants/:id` | Obtiene un restaurante por ID   |
+| PUT    | `/api/restaurants/:id` | Actualiza un restaurante por ID |
+| DELETE | `/api/restaurants/:id` | Elimina un restaurante por ID   |
 
 ---
 
