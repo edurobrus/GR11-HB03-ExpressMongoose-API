@@ -109,7 +109,13 @@ const restaurantController = require("../controllers/restaurantController");
  *   get:
  *     summary: Obtener todos los restaurantes
  *     tags: [Restaurants]
- *     description: Retorna una lista con todos los restaurantes almacenados en la base de datos.
+ *     description: Retorna una lista con todos los restaurantes almacenados en la base de datos. Se puede especificar un límite mediante el parámetro query 'limit'.
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: number
+ *         description: "Número máximo de restaurantes a retornar. Valor por defecto: 10."
  *     responses:
  *       200:
  *         description: Lista de restaurantes obtenida correctamente.
@@ -168,8 +174,8 @@ router.get("/:id", restaurantController.getRestaurantById);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Restaurant'
- *       400:
- *         description: Datos de entrada inválidos.
+ *       500:
+ *         description: Error al crear el restaurante.
  */
 router.post("/", restaurantController.createRestaurant);
 
@@ -202,8 +208,8 @@ router.post("/", restaurantController.createRestaurant);
  *               $ref: '#/components/schemas/Restaurant'
  *       404:
  *         description: Restaurante no encontrado.
- *       400:
- *         description: Datos de entrada inválidos.
+ *       500:
+ *         description: Error al actualizar el restaurante.
  */
 router.put("/:id", restaurantController.updateRestaurant);
 
@@ -222,10 +228,12 @@ router.put("/:id", restaurantController.updateRestaurant);
  *         required: true
  *         description: ID del restaurante.
  *     responses:
- *       204:
+ *       200:
  *         description: Restaurante eliminado correctamente.
  *       404:
  *         description: Restaurante no encontrado.
+ *       500:
+ *         description: Error al eliminar el restaurante.
  */
 router.delete("/:id", restaurantController.deleteRestaurant);
 

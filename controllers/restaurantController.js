@@ -1,14 +1,16 @@
 const Restaurant = require('../models/Restaurant');
 
-// GET /api/restaurants - Obtiene todos los restaurantes
+// GET /api/restaurants - Obtiene restaurantes con límite opcional pasado por la URL
 exports.getRestaurants = async (req, res) => {
   try {
-    const restaurants = await Restaurant.find();
+    const limit = parseInt(req.query.limit, 10) || 10; // Si no se especifica, se usa 10 por defecto
+    const restaurants = await Restaurant.find().limit(limit);
     res.json(restaurants);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los restaurantes' });
   }
 };
+
 
 // GET /api/restaurants/:id - Obtiene un restaurante por ID
 exports.getRestaurantById = async (req, res) => {
@@ -53,3 +55,4 @@ exports.deleteRestaurant = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el restaurante' });
   }
 };
+
