@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');  // Asegúrate de importar el modelo User si es necesario
 
 // Esquema de Restaurante
 const restaurantSchema = new mongoose.Schema({
@@ -29,15 +30,15 @@ const restaurantSchema = new mongoose.Schema({
   price_range: { type: Number, required: false },
   aggregate_rating: { type: Number, required: false },
   rating_color: { type: String, required: false },
-  rating_text: { type: String, required: false },
   votes: [
     {
-      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-      username: { type: String, required: true },
+      user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },  // Aquí guardas la referencia al User
       rating: { type: Number, required: true },
+      rating_text: { type: String, required: false },
       date: { type: Date, default: Date.now },
     },
   ],
+  
   country_code: { type: Number, required: false },
 });
 
