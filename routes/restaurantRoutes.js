@@ -212,14 +212,14 @@ router.delete("delete/:id", restaurantController.deleteRestaurant);
  *         name: lng
  *         schema:
  *           type: number
- *           default: 121.027535  # Ejemplo: Ciudad de México
+ *           default: 1.82446 # Ejemplo: Ciudad de México
  *         required: true
  *         description: Longitud de la ubicación del usuario.
  *       - in: query
  *         name: lat
  *         schema:
  *           type: number
- *           default: 14.565443  # Ejemplo: Ciudad de México
+ *           default: 45.64261  # Ejemplo: Ciudad de México
  *         required: true
  *         description: Latitud de la ubicación del usuario.
  *       - in: query
