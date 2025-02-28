@@ -11,15 +11,17 @@ exports.getRestaurants = async (req, res) => {
   }
 };
 
-
-// GET /api/restaurants/:id - Obtiene un restaurante por ID
 exports.getRestaurantById = async (req, res) => {
   try {
     const restaurant = await Restaurant.findById(req.params.id);
-    if (!restaurant) return res.status(404).json({ error: 'Restaurante no encontrado' });
-    res.json(restaurant);
+
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurante no encontrado" });
+    }
+
+    res.status(200).json(restaurant);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener el restaurante' });
+    res.status(500).json({ message: "Error al obtener el restaurante", error });
   }
 };
 
@@ -56,3 +58,31 @@ exports.deleteRestaurant = async (req, res) => {
   }
 };
 
+// GET /api/restaurants/nearby?lat=XX&lng=YY&maxDistance=ZZ
+exports.getNearbyRestaurants = async (req, res) => {
+  try {
+    const { lat, lng, maxDistance } = req.query;
+    
+    if (!lat || !lng) {
+      return res.status(400).json({ error: 'Latitud y longitud son requeridos' });
+    }
+    
+    const distance = maxDistance ? parseInt(maxDistance, 10) : 5000; // 5km por defecto
+    
+    const nearbyRestaurants = await Restaurant.find({
+      location: {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [parseFloat(lng), parseFloat(lat)],
+          },
+          $maxDistance: distance,
+        },
+      },
+    });
+    
+    res.json(nearbyRestaurants);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener restaurantes cercanos' });
+  }
+};

@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
+// Esquema de Restaurante
 const restaurantSchema = new mongoose.Schema({
   name: { type: String, required: false },
   country_code: { type: Number, required: false },
@@ -7,8 +8,17 @@ const restaurantSchema = new mongoose.Schema({
   address: { type: String, required: false },
   locality: { type: String, required: false },
   locality_verbose: { type: String, required: false },
-  longitude: { type: Number, required: false },
-  latitude: { type: Number, required: false },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point',
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
   cuisines: { type: String, required: false },
   average_cost_for_two: { type: Number, required: false },
   currency: { type: String, required: false },
@@ -17,10 +27,24 @@ const restaurantSchema = new mongoose.Schema({
   is_delivering_now: { type: Boolean, required: false },
   switch_to_order_menu: { type: Boolean, required: false },
   price_range: { type: Number, required: false },
-  aggregate_rating: { type: Number, required: false }, 
-  rating_color: { type: String, required: false }, 
-  rating_text: { type: String, required: false }, 
-  votes: { type: Number, required: false }, 
+  aggregate_rating: { type: Number, required: false },
+  rating_color: { type: String, required: false },
+  rating_text: { type: String, required: false },
+  votes: [
+    {
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+      username: { type: String, required: true },
+      rating: { type: Number, required: true },
+      date: { type: Date, default: Date.now },
+    },
+  ],
+  country_code: { type: Number, required: false },
 });
 
-module.exports = mongoose.model("Restaurant", restaurantSchema);
+// Crear índice geoespacial para búsquedas por proximidad
+restaurantSchema.index({ location: '2dsphere' });
+
+// Crear el modelo de Restaurante
+const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+
+module.exports = Restaurant;

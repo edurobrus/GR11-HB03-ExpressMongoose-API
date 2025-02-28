@@ -6,7 +6,7 @@ const restaurantController = require("../controllers/restaurantController");
  * @swagger
  * tags:
  *   name: Restaurants
- *   description: Endpoints para la gestión de restaurantes, incluyendo operaciones CRUD.
+ *   description: Endpoints para la gestión de restaurantes, incluyendo operaciones CRUD y búsqueda por proximidad.
  */
 
 /**
@@ -22,6 +22,18 @@ const restaurantController = require("../controllers/restaurantController");
  *         name:
  *           type: string
  *           description: Nombre del restaurante.
+ *         location:
+ *           type: object
+ *           properties:
+ *             type:
+ *               type: string
+ *               enum: ['Point']
+ *               description: Tipo de dato geoespacial.
+ *             coordinates:
+ *               type: array
+ *               items:
+ *                 type: number
+ *               description: Coordenadas geográficas [longitud, latitud].
  *         country_code:
  *           type: number
  *           description: Código de país.
@@ -31,18 +43,6 @@ const restaurantController = require("../controllers/restaurantController");
  *         address:
  *           type: string
  *           description: Dirección del restaurante.
- *         locality:
- *           type: string
- *           description: Localidad del restaurante.
- *         locality_verbose:
- *           type: string
- *           description: Descripción detallada de la localidad.
- *         longitude:
- *           type: number
- *           description: Coordenada de longitud.
- *         latitude:
- *           type: number
- *           description: Coordenada de latitud.
  *         cuisines:
  *           type: string
  *           description: Tipos de cocina ofrecidos.
@@ -58,48 +58,27 @@ const restaurantController = require("../controllers/restaurantController");
  *         has_online_delivery:
  *           type: boolean
  *           description: Indica si el restaurante ofrece entrega en línea.
- *         is_delivering_now:
- *           type: boolean
- *           description: Indica si el restaurante está entregando en este momento.
- *         switch_to_order_menu:
- *           type: boolean
- *           description: Indica si el restaurante permite cambiar al menú de pedidos.
- *         price_range:
- *           type: number
- *           description: Rango de precios del restaurante.
  *         aggregate_rating:
  *           type: number
  *           description: Calificación agregada del restaurante.
- *         rating_color:
- *           type: string
- *           description: Color asociado a la calificación.
- *         rating_text:
- *           type: string
- *           description: Texto descriptivo de la calificación.
  *         votes:
  *           type: number
  *           description: Número de votos recibidos.
  *       example:
- *         _id: 60c72b2f9b1e8a001c8e4d2a
+ *         _id: "60c72b2f9b1e8a001c8e4d2a"
  *         name: "Le Petit Souffle"
+ *         location:
+ *           type: "Point"
+ *           coordinates: [121.027535, 14.565443]
  *         country_code: 162
  *         city: "Makati City"
  *         address: "Third Floor, Century City Mall, Kalayaan Avenue, Poblacion"
- *         locality: "Century City Mall, Poblacion, Makati City"
- *         locality_verbose: "Century City Mall, Poblacion, Makati City, Makati City"
- *         longitude: 121.027535
- *         latitude: 14.565443
  *         cuisines: "French, Japanese, Desserts"
  *         average_cost_for_two: 1100
- *         currency: "Botswana Pula(P)"
+ *         currency: "PHP"
  *         has_table_booking: true
  *         has_online_delivery: false
- *         is_delivering_now: false
- *         switch_to_order_menu: false
- *         price_range: 3
  *         aggregate_rating: 4.8
- *         rating_color: "Dark Green"
- *         rating_text: "Excellent"
  *         votes: 314
  */
 
@@ -109,7 +88,6 @@ const restaurantController = require("../controllers/restaurantController");
  *   get:
  *     summary: Obtener todos los restaurantes
  *     tags: [Restaurants]
- *     description: Retorna una lista con todos los restaurantes almacenados en la base de datos. Se puede especificar un límite mediante el parámetro query 'limit'.
  *     parameters:
  *       - in: query
  *         name: limit
@@ -130,18 +108,17 @@ router.get("/", restaurantController.getRestaurants);
 
 /**
  * @swagger
- * /api/restaurants/{id}:
+ * /api/restaurants/getById/{id}:
  *   get:
  *     summary: Obtener un restaurante por ID
  *     tags: [Restaurants]
- *     description: Obtiene un restaurante específico de la base de datos a partir de su ID.
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: ID del restaurante.
+ *         description: ID del restaurante a obtener.
  *     responses:
  *       200:
  *         description: Restaurante obtenido correctamente.
@@ -152,7 +129,9 @@ router.get("/", restaurantController.getRestaurants);
  *       404:
  *         description: Restaurante no encontrado.
  */
-router.get("/:id", restaurantController.getRestaurantById);
+router.get("/getById/:id", restaurantController.getRestaurantById);
+
+
 
 /**
  * @swagger
@@ -160,7 +139,6 @@ router.get("/:id", restaurantController.getRestaurantById);
  *   post:
  *     summary: Crear un nuevo restaurante
  *     tags: [Restaurants]
- *     description: Agrega un nuevo restaurante a la base de datos.
  *     requestBody:
  *       required: true
  *       content:
@@ -170,10 +148,6 @@ router.get("/:id", restaurantController.getRestaurantById);
  *     responses:
  *       201:
  *         description: Restaurante creado correctamente.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Restaurant'
  *       500:
  *         description: Error al crear el restaurante.
  */
@@ -181,11 +155,10 @@ router.post("/", restaurantController.createRestaurant);
 
 /**
  * @swagger
- * /api/restaurants/{id}:
+ * /api/restaurants/update/{id}:
  *   put:
  *     summary: Actualizar un restaurante
  *     tags: [Restaurants]
- *     description: Modifica un restaurante existente en la base de datos mediante su ID.
  *     parameters:
  *       - in: path
  *         name: id
@@ -202,24 +175,17 @@ router.post("/", restaurantController.createRestaurant);
  *     responses:
  *       200:
  *         description: Restaurante actualizado correctamente.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Restaurant'
  *       404:
  *         description: Restaurante no encontrado.
- *       500:
- *         description: Error al actualizar el restaurante.
  */
-router.put("/:id", restaurantController.updateRestaurant);
+router.put("/update/:id", restaurantController.updateRestaurant);
 
 /**
  * @swagger
- * /api/restaurants/{id}:
+ * /api/restaurants/delete/{id}:
  *   delete:
  *     summary: Eliminar un restaurante
  *     tags: [Restaurants]
- *     description: Elimina un restaurante de la base de datos utilizando su ID.
  *     parameters:
  *       - in: path
  *         name: id
@@ -232,9 +198,47 @@ router.put("/:id", restaurantController.updateRestaurant);
  *         description: Restaurante eliminado correctamente.
  *       404:
  *         description: Restaurante no encontrado.
- *       500:
- *         description: Error al eliminar el restaurante.
  */
-router.delete("/:id", restaurantController.deleteRestaurant);
+router.delete("delete/:id", restaurantController.deleteRestaurant);
+
+/**
+ * @swagger
+ * /api/restaurants/nearby:
+ *   get:
+ *     summary: Obtener restaurantes cercanos
+ *     tags: [Restaurants]
+ *     parameters:
+ *       - in: query
+ *         name: lng
+ *         schema:
+ *           type: number
+ *           default: 121.027535  # Ejemplo: Ciudad de México
+ *         required: true
+ *         description: Longitud de la ubicación del usuario.
+ *       - in: query
+ *         name: lat
+ *         schema:
+ *           type: number
+ *           default: 14.565443  # Ejemplo: Ciudad de México
+ *         required: true
+ *         description: Latitud de la ubicación del usuario.
+ *       - in: query
+ *         name: maxDistance
+ *         schema:
+ *           type: number
+ *           default: 5000
+ *         description: Distancia máxima en metros (por defecto 5000m).
+ *     responses:
+ *       200:
+ *         description: Lista de restaurantes cercanos obtenida correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Restaurant'
+ */
+router.get("/nearby", restaurantController.getNearbyRestaurants);
+
 
 module.exports = router;
