@@ -25,6 +25,8 @@ app.get("/", (req, res) => {
 const restaurantRoutes = require("./routes/restaurantRoutes");
 app.use("/api/restaurants", restaurantRoutes);
 
+const citieRoutes = require("./routes/citieRoutes");
+app.use("/api/cities", citieRoutes);
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
