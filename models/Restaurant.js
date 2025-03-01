@@ -9,15 +9,15 @@ const restaurantSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    location: { // ✅ Campo GeoJSON
+    location: {
         type: {
             type: String,
-            enum: ['Point'], // Solo permite 'Point'
+            enum: ['Point'],
             default: 'Point',
             required: true
         },
         coordinates: {
-            type: [Number], // [longitude, latitude]
+            type: [Number],
             required: true
         }
     }

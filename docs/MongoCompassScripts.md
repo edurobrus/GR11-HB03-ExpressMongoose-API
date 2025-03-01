@@ -73,3 +73,14 @@ db.users.updateMany(
     $unset: ["latitude", "longitude"]
   }]
 );
+
+
+db.users.updateMany(
+    {}, // Filtro vacío para aplicar a todos los documentos
+    {
+        $set: {
+            cities: [], // Inicializa el campo `cities` como un array vacío
+            restaurants: [] // Inicializa el campo `restaurants` como un array vacío
+        }
+    }
+);

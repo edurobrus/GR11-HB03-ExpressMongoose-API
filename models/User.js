@@ -21,7 +21,15 @@ const userSchema = new mongoose.Schema({
             type: [Number], // [longitude, latitude]
             required: true
         }
-    }
+    },
+    cities: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Citie' // Referencia al modelo Citie
+    }],
+    restaurants: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Restaurant' // Referencia al modelo Restaurant
+    }]
 });
 
 // Índice geoespacial para consultas de proximidad
