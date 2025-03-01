@@ -10,29 +10,44 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    location: { // ✅ Campo GeoJSON
+    location: {
         type: {
             type: String,
-            enum: ['Point'], // Solo permite 'Point'
+            enum: ['Point'],
             default: 'Point',
             required: true
         },
         coordinates: {
-            type: [Number], // [longitude, latitude]
+            type: [Number],
             required: true
         }
     },
     cities: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Citie' // Referencia al modelo Citie
+        city: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Citie'
+        },
+        rating: {
+            type: Number,
+            min: 1,
+            max: 5
+        },
+        rating_text: String
     }],
     restaurants: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Restaurant' // Referencia al modelo Restaurant
+        restaurant: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Restaurant'
+        },
+        rating: {
+            type: Number,
+            min: 1,
+            max: 5
+        },
+        rating_text: String
     }]
 });
 
-// Índice geoespacial para consultas de proximidad
 userSchema.index({ location: '2dsphere' });
 
 const User = mongoose.model('User', userSchema);
