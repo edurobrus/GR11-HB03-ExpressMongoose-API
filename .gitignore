@@ -20,3 +20,7 @@ build/
 
 # Caché de herramientas
 .cache/
+
+# Ignorar todo dentro de data excepto archivos en la raíz
+data/**
+!data/*.*
