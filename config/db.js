@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const dbURI = process.env.MONGO_URI || 'mongodb://localhost:27017/tu_base_de_datos';
+const dbURI = process.env.MONGO_URI || 'mongodb://localhost:27017/cbd';
 
 const connectDB = async () => {
   try {
