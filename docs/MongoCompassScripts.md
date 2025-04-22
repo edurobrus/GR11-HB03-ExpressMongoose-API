@@ -84,3 +84,37 @@ db.users.updateMany(
         }
     }
 );
+
+Esto para añadir avg_rating en las ciudades:
+db.cities.updateMany(
+  {},
+  [{
+    $set: {
+      avg_rating: {
+        $round: [ 
+          { $multiply: [ { $rand: {} }, 5 ] }, // Genera un número entre 0 y 5
+          1 // Redondea a 1 decimal (ej: 3.5, 4.8)
+        ]
+      }
+    }
+  }]
+);
+
+Y poner a name el restaurant y las ciudaden vez de "city_name" y "restaurant_name"
+db.cities.updateMany(
+  {}, 
+  { $rename: { "city_name": "name" } }
+);
+
+db.restaurants.updateMany(
+  {}, 
+  { $rename: { "restaurant_name": "name" } }
+);
+
+
+// Versión CORRECTA (sin pipeline de agregación)
+db.cities.updateMany(
+  {},
+  { $set: { type: "CITY" } } 
+);
+
