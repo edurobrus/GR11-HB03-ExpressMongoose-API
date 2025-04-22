@@ -1,19 +1,23 @@
-const Restaurant = require('../models/Restaurant');
+const Location = require('../models/Location'); // Cambiar el modelo
 
-// GET /api/restaurants - Obtiene restaurantes con límite opcional pasado por la URL
+// GET /api/restaurants
 exports.getRestaurants = async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit, 10) || 10; // Si no se especifica, se usa 10 por defecto
-    const restaurants = await Restaurant.find().limit(limit);
+    const limit = parseInt(req.query.limit, 10) || 10;
+    const restaurants = await Location.find({ type: "RESTAURANT" }).limit(limit); // Filtro añadido
     res.json(restaurants);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los restaurantes' });
   }
 };
 
+// GET /api/restaurants/:id
 exports.getRestaurantById = async (req, res) => {
   try {
-    const restaurant = await Restaurant.findById(req.params.id);
+    const restaurant = await Location.findOne({ 
+      _id: req.params.id,
+      type: "RESTAURANT" // Filtro combinado
+    });
 
     if (!restaurant) {
       return res.status(404).json({ message: "Restaurante no encontrado" });
@@ -25,10 +29,13 @@ exports.getRestaurantById = async (req, res) => {
   }
 };
 
-// POST /api/restaurants - Crea un nuevo restaurante
+// POST /api/restaurants
 exports.createRestaurant = async (req, res) => {
   try {
-    const newRestaurant = new Restaurant(req.body);
+    const newRestaurant = new Location({
+      ...req.body,
+      type: "RESTAURANT" // Forzar el tipo
+    });
     await newRestaurant.save();
     res.status(201).json(newRestaurant);
   } catch (error) {
@@ -36,21 +43,35 @@ exports.createRestaurant = async (req, res) => {
   }
 };
 
-// PUT /api/restaurants/:id - Actualiza un restaurante por ID
+// PUT /api/restaurants/:id
 exports.updateRestaurant = async (req, res) => {
   try {
-    const updateRestaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updateRestaurant) return res.status(404).json({ error: 'Restaurante no encontrado' });
-    res.json(updateRestaurant);
+    delete req.body.type; // Prevenir cambio de tipo
+    
+    const updatedRestaurant = await Location.findOneAndUpdate(
+      { 
+        _id: req.params.id,
+        type: "RESTAURANT" // Filtro combinado
+      },
+      req.body,
+      { new: true }
+    );
+    
+    if (!updatedRestaurant) return res.status(404).json({ error: 'Restaurante no encontrado' });
+    res.json(updatedRestaurant);
   } catch (error) {
     res.status(500).json({ error: 'Error al actualizar el restaurante' });
   }
 };
 
-// DELETE /api/restaurants/:id - Elimina un restaurante por ID
+// DELETE /api/restaurants/:id
 exports.deleteRestaurant = async (req, res) => {
   try {
-    const deletedRestaurant = await Restaurant.findByIdAndDelete(req.params.id);
+    const deletedRestaurant = await Location.findOneAndDelete({ 
+      _id: req.params.id,
+      type: "RESTAURANT" // Filtro combinado
+    });
+    
     if (!deletedRestaurant) return res.status(404).json({ error: 'Restaurante no encontrado' });
     res.json({ message: 'Restaurante eliminado correctamente' });
   } catch (error) {
@@ -58,7 +79,7 @@ exports.deleteRestaurant = async (req, res) => {
   }
 };
 
-// GET /api/restaurants/nearby?lat=XX&lng=YY&maxDistance=ZZ
+// GET /api/restaurants/nearby
 exports.getNearbyRestaurants = async (req, res) => {
   try {
     const { lat, lng, maxDistance } = req.query;
@@ -67,9 +88,10 @@ exports.getNearbyRestaurants = async (req, res) => {
       return res.status(400).json({ error: 'Latitud y longitud son requeridos' });
     }
     
-    const distance = maxDistance ? parseInt(maxDistance, 10) : 5000; // 5km por defecto
+    const distance = maxDistance ? parseInt(maxDistance, 10) : 5000;
     
-    const nearbyRestaurants = await Restaurant.find({
+    const nearbyRestaurants = await Location.find({
+      type: "RESTAURANT", // Filtro añadido
       location: {
         $near: {
           $geometry: {
