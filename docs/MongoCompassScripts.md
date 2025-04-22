@@ -5,6 +5,7 @@ Los usuarios User.csv los he sacado de :https://www.kaggle.com/datasets/programm
 He sacado los Restaurant.csv: https://www.kaggle.com/datasets/stefanoleone992/tripadvisor-european-restaurants
 Despues he hecho esta operacion en MongoCompass: y luego me he descargado los json de los dos que estan en la carpeta data
 Despues este es el de City.csv: https://www.kaggle.com/datasets/max-mind/world-cities-database?select=worldcitiespop.csv
+Messages: https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset
 Compress-Archive -Path data/cbd.cities.json -DestinationPath .\archivo.zip  
 Compress-Archive -Path data/cbd.restaurants.json -DestinationPath .\archivo.zip  
 Compress-Archive -Path data/cbd.users.json -DestinationPath .\archivo.zip  

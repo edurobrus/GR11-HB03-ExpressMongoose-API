@@ -1,42 +1,38 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
-const swaggerDocs = require("./config/swaggerConfig");
-const { loadModels } = require("./models");  // Importar el cargador de modelos
+const swaggerDocs = require("./config/swaggerConfig"); // Importamos Swagger
 
 dotenv.config();
 
 const app = express();
-loadModels();
-const startServer = async () => {
-  try {
-    await connectDB();
-    app.use(express.json());
-    swaggerDocs(app);
-    const restaurantRoutes = require("./routes/restaurantRoutes");
-    app.use("/api/restaurants", restaurantRoutes);
 
-    const citieRoutes = require("./routes/citieRoutes");
-    app.use("/api/cities", citieRoutes);
+// Conectar a MongoDB
+connectDB();
 
-    // Ruta raíz
-    app.get("/", (req, res) => {
-      res.send("API REST con Node, Express y Mongongoose");
-    });
+// Middleware para parsear JSON
+app.use(express.json());
 
-    // 5. Iniciar servidor
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`
-🚀 Servidor activo en: http://localhost:${PORT}
-📚 Documentación disponible en: http://localhost:${PORT}/api-docs
-      `);
-    });
+// Inicializar Swagger
+swaggerDocs(app);
 
-  } catch (error) {
-    console.error("❌ Fallo crítico al iniciar:", error);
-    process.exit(1);
-  }
-};
+// Ruta raíz de ejemplo
+app.get("/", (req, res) => {
+  res.send("API REST con Node, Express y Mongoose");
+});
 
-startServer();
+// Uso de rutas para el modelo Item
+const achievementRoutes = require("./routes/achievementRoutes");
+app.use("/api/achievements", achievementRoutes);
+
+const citieRoutes = require("./routes/citieRoutes");
+app.use("/api/cities", citieRoutes);
+
+const restaurantRoutes = require("./routes/restaurantRoutes");
+app.use("/api/restaurants", restaurantRoutes);
+
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+});
