@@ -1,15 +1,26 @@
 const mongoose = require('mongoose');
 
 const locationSchema = new mongoose.Schema({
-    type: {
-        type: String,
-        enum: ['cities', 'restaurants']
-    },
-    name: String,
-    coordinates: {
-        type: Map,
-        of: Number
+  _id: mongoose.Schema.Types.ObjectId,
+  location: {
+    name: {
+      type: String,
+      required: true
     }
+  },
+  avg_rating: {
+    type: Number,
+    required: true
+  },
+  type: {
+    type: String,
+    enum: ['CITY', 'RESTAURANT'],
+    required: true
+  },
+  total_ratings: {
+    type: Number,
+    required: true
+  }
 });
 
 module.exports = mongoose.model('Location', locationSchema);
