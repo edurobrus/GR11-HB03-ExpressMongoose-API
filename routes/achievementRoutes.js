@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const achievementController = require("../controllers/achievementController");
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -85,6 +86,8 @@ router.get("/getById/:id", achievementController.getAchievementById);
  *   get:
  *     summary: Get all achievements of a user
  *     tags: [Achievements]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: userId
@@ -104,6 +107,6 @@ router.get("/getById/:id", achievementController.getAchievementById);
  *       404:
  *         description: The user has no achievements
  */
-router.get("/user/:userId", achievementController.getAchievementsByUserId);
+router.get("/user/:userId", authenticateJWT, achievementController.getAchievementsByUserId);
 
 module.exports = router;

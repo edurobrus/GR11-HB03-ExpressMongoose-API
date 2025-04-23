@@ -1,10 +1,8 @@
 const express = require("express");
-const dotenv = require("dotenv");
+require('dotenv').config();
 
 const connectDB = require("./config/db");
 const swaggerDocs = require("./config/swaggerConfig");
-
-dotenv.config();
 
 const app = express();
 
@@ -32,7 +30,9 @@ const routes = {
   cities: require("./routes/cityRoutes"),
   restaurants: require("./routes/restaurantRoutes"),
   locations: require("./routes/locationRoutes"),
-  users: require("./routes/userRoutes")
+  auth: require("./routes/authRoutes"),
+  users: require("./routes/userRoutes"),
+  messages: require("./routes/messageRoutes")
 };
 
 // Route declarations
@@ -41,7 +41,12 @@ app.use("/api/achievements", routes.achievements);
 app.use("/api/cities", routes.cities);
 app.use("/api/restaurants", routes.restaurants);
 app.use("/api/locations", routes.locations);
+app.use("/api/auth", routes.auth);
 app.use("/api/users", routes.users);
+app.use("/api/messages", routes.messages);
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 // Start server
 const PORT = process.env.PORT || 3000;

@@ -112,6 +112,8 @@ router.get("/", restaurantController.getRestaurants);
  *   get:
  *     summary: Get nearby restaurants
  *     tags: [Restaurants]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: lng
@@ -176,6 +178,8 @@ router.get("/getById/:id", restaurantController.getRestaurantById);
  *   post:
  *     summary: Create a new restaurant
  *     tags: [Restaurants]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -196,6 +200,8 @@ router.post("/", restaurantController.createRestaurant);
  *   put:
  *     summary: Update a restaurant
  *     tags: [Restaurants]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -223,6 +229,8 @@ router.put("/update/:id", restaurantController.updateRestaurant);
  *   delete:
  *     summary: Delete a restaurant
  *     tags: [Restaurants]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

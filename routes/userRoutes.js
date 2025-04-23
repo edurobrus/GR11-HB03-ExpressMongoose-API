@@ -16,6 +16,8 @@ const userController = require('../controllers/userController');
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -51,6 +53,8 @@ router.post('/', userController.createUser);
  *   put:
  *     summary: Update an existing user
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

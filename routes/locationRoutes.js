@@ -80,6 +80,8 @@ router.get('/', locationController.getLocations);
  *   get:
  *     summary: Get locations near the provided coordinates
  *     tags: [Locations]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: lat
@@ -187,6 +189,8 @@ router.get('/:id', locationController.getLocationById);
  *   put:
  *     summary: Update the average rating of a location
  *     tags: [Locations]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

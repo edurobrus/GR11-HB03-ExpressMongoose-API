@@ -8,6 +8,8 @@ const populateController = require('../controllers/populateController');
  *   post:
  *     summary: Imports data from ZIP files
  *     tags: [Populate]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Successful import

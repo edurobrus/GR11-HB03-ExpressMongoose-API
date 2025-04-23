@@ -71,6 +71,8 @@ router.get("/", cityController.getCities);
  *   get:
  *     summary: Get nearby cities
  *     tags: [Cities]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: lng
@@ -131,6 +133,8 @@ router.get("/getById/:id", cityController.getCityById);
  *   post:
  *     summary: Create new city
  *     tags: [Cities]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -151,6 +155,8 @@ router.post("/", cityController.createCity);
  *   put:
  *     summary: Update city
  *     tags: [Cities]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -177,6 +183,8 @@ router.put("/update/:id", cityController.updateCity);
  *   delete:
  *     summary: Delete city
  *     tags: [Cities]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
