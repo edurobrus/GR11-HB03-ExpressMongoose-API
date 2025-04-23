@@ -1,5 +1,5 @@
 // controllers/citieController.js
-const Location = require('../models/Location'); // Cambiado a Location
+const Location = require('../models/location');
 
 exports.getCities = async (req, res) => {
     try {
@@ -11,70 +11,12 @@ exports.getCities = async (req, res) => {
     }
 };
 
-exports.getCitieById = async (req, res) => {
-    try {
-        const location = await Location.findOne({ 
-            _id: req.params.id, 
-            type: "CITY" 
-        });
-        if (!location) return res.status(404).json({ message: 'Ciudad no encontrada' });
-        res.json(location);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-exports.createCitie = async (req, res) => {
-    try {
-        const newLocation = new Location({
-            ...req.body,
-            type: "CITY" // Fuerza el tipo
-        });
-        const savedLocation = await newLocation.save();
-        res.status(201).json(savedLocation);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-};
-
-exports.updateCitie = async (req, res) => {
-    try {
-        delete req.body.type; // Previene modificación del tipo
-        
-        const updatedLocation = await Location.findOneAndUpdate(
-            { 
-                _id: req.params.id, 
-                type: "CITY" 
-            },
-            req.body,
-            { new: true }
-        );
-        if (!updatedLocation) return res.status(404).json({ message: 'Ciudad no encontrada' });
-        res.json(updatedLocation);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-};
-
-exports.deleteCitie = async (req, res) => {
-    try {
-        const deletedLocation = await Location.findOneAndDelete({ 
-            _id: req.params.id, 
-            type: "CITY" 
-        });
-        if (!deletedLocation) return res.status(404).json({ message: 'Ciudad no encontrada' });
-        res.json({ message: 'Ciudad eliminada exitosamente' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
 exports.getNearbyCities = async (req, res) => {
     try {
         const { lng, lat, maxDistance = 50000 } = req.query;
         
         const cities = await Location.find({
-            type: "CITY", // Filtro combinado
+            type: "CITY",
             location: {
                 $near: {
                     $geometry: {
@@ -87,6 +29,64 @@ exports.getNearbyCities = async (req, res) => {
         });
         
         res.json(cities);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.getCityById = async (req, res) => {
+    try {
+        const location = await Location.findOne({ 
+            _id: req.params.id, 
+            type: "CITY" 
+        });
+        if (!location) return res.status(404).json({ message: 'City not found' });
+        res.json(location);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.createCity = async (req, res) => {
+    try {
+        const newLocation = new Location({
+            ...req.body,
+            type: "CITY"
+        });
+        const savedLocation = await newLocation.save();
+        res.status(201).json(savedLocation);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+exports.updateCity = async (req, res) => {
+    try {
+        delete req.body.type;
+        
+        const updatedLocation = await Location.findOneAndUpdate(
+            { 
+                _id: req.params.id, 
+                type: "CITY" 
+            },
+            req.body,
+            { new: true }
+        );
+        if (!updatedLocation) return res.status(404).json({ message: 'City not found' });
+        res.json(updatedLocation);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+exports.deleteCity = async (req, res) => {
+    try {
+        const deletedLocation = await Location.findOneAndDelete({ 
+            _id: req.params.id, 
+            type: "CITY" 
+        });
+        if (!deletedLocation) return res.status(404).json({ message: 'City not found' });
+        res.json({ message: 'City successfully deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

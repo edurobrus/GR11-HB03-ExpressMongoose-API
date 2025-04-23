@@ -2,9 +2,18 @@ const mongoose = require('mongoose');
 
 const locationSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  name: {
+    type: String,
+    required: true
+  },
   location: {
-    name: {
+    type: {
       type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
       required: true
     }
   },
@@ -23,4 +32,7 @@ const locationSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Location', locationSchema);
+locationSchema.index({ location: "2dsphere" });
+
+module.exports = mongoose.models.Location || mongoose.model('Location', locationSchema);
+

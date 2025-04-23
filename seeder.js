@@ -81,12 +81,19 @@ async function processZip(zipPath, tempDir, index, totalZips, importFunction) {
     }
 }
 
-async function main() {
-    const client = new MongoClient(MONGO_URI); // Aquí se usa MongoClient
+async function runImport() {
+    const client = new MongoClient(MONGO_URI);
     
     try {
         await client.connect();
         const db = client.db(DB_NAME);
+        
+        const adminDb = client.db().admin();
+        const dbs = await adminDb.listDatabases();
+        if (dbs.databases.some(d => d.name === DB_NAME)) {
+            console.log(`⚠️  Eliminando base de datos existente: ${DB_NAME}`);
+            await db.dropDatabase();
+        }
         const importJsonBound = importJsonToMongo.bind({ db });
 
         const zipFiles = (await readdir(ZIP_FOLDER))
@@ -116,7 +123,4 @@ async function main() {
     }
 }
 
-main().catch(err => {
-    console.error('Error no controlado:', err);
-    process.exit(1);
-});
+module.exports = runImport;
