@@ -20,10 +20,6 @@ cd GR11-HB03-ExpressMongoose-API
 ```bash
 npm install
 ```
-```bash
-npm install adm-zip
-```
-* Este paquete permite descomprimir los archivos zip de la carpeta data a la hora de popular la base de datos.
 
 ### 3. Configurar variables de entorno
 Crea un archivo `.env` en la raíz del proyecto y define las siguientes variables:
