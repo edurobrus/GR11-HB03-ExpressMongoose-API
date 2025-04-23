@@ -15,7 +15,7 @@ exports.getAchievements = async (req, res) => {
 exports.getAchievementById = async (req, res) => {
     try {
         const achievement = await Achievement.findById(req.params.id);
-        if (!achievement) return res.status(404).json({ message: 'Logro no encontrado' });
+        if (!achievement) return res.status(404).json({ message: 'Achievement not found' });
         res.json(achievement);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -27,13 +27,12 @@ exports.getAchievementsByUserId = async (req, res) => {
         const userId = req.params.userId;
 
         const userAchievements = await UserAchievement.find({ user_id: userId })
-            .populate('achievement_id'); // trae los datos completos del logro
+            .populate('achievement_id');
 
         if (userAchievements.length === 0) {
-            return res.status(404).json({ message: 'No se encontraron logros para este usuario' });
+            return res.status(404).json({ message: 'Not achievements found for this user' });
         }
 
-        // Devolver solo los logros (puedes incluir la fecha si querés)
         const achievements = userAchievements.map(ua => ({
             ...ua.achievement_id.toObject(),
             obtained_date: ua.obtained_date
