@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 const { promisify } = require('util');
 const JSONStream = require('JSONStream');
 const es = require('event-stream');
+const WebSocket = require('ws');
 
 // CONFIGURACIÓN
 const MONGO_URI = 'mongodb://localhost:27017';
@@ -20,107 +21,140 @@ const readdir = promisify(fs.readdir);
 const mkdir = promisify(fs.mkdir);
 const rm = promisify(fs.rm);
 
+// Función auxiliar para enviar mensajes WebSocket
+function sendWsMessage(clients, event, data) {
+  const message = JSON.stringify({ event, data });
+  clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(message);
+    }
+  });
+}
+
 async function importJsonToMongo(jsonPath, collectionName) {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const collection = this.db.collection(collectionName);
-            let buffer = [];
-            let count = 0;
-            
-            const stream = fs.createReadStream(jsonPath, { encoding: 'utf8' })
-                .pipe(JSONStream.parse('*'))
-                .pipe(es.mapSync(data => {
-                    buffer.push(EJSON.parse(EJSON.stringify(data)));
-                    
-                    if (buffer.length >= BATCH_SIZE) {
-                        stream.pause();
-                        collection.insertMany(buffer)
-                            .then(() => {
-                                count += buffer.length;
-                                buffer = [];
-                                stream.resume();
-                            })
-                            .catch(reject);
-                    }
-                    return data;
-                }));
-
-            stream.on('end', async () => {
-                if (buffer.length > 0) {
-                    await collection.insertMany(buffer);
-                    count += buffer.length;
-                }
-                console.log(`  ↳ Inserted ${count} documents into '${collectionName}'`);
-                resolve();
-            });
-
-            stream.on('error', reject);
-            
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
-
-async function processZip(zipPath, tempDir, index, totalZips, importFunction) {
-    console.log(`\n[${index}/${totalZips}] Processing ZIP: ${path.basename(zipPath)}`);
-    
-    const zip = new AdmZip(zipPath);
-    zip.extractAllTo(tempDir, true);
-
-    const files = await fs.promises.readdir(tempDir);
-    const jsonFiles = files.filter(f => path.extname(f) === '.json');
-    
-    for (const jsonFile of jsonFiles) {
-        const jsonPath = path.join(tempDir, jsonFile);
-        const filename = path.basename(jsonFile, '.json');
-        const collectionName = filename.replace(/^cbd\./, '');
-        
-        console.log(`  → Processing file: ${jsonFile} → collection '${collectionName}'`);
-        await importFunction(jsonPath, collectionName);
-    }
-}
-
-async function runImport() {
-    const client = new MongoClient(MONGO_URI);
-    
+  return new Promise(async (resolve, reject) => {
     try {
-        await client.connect();
-        const db = client.db(DB_NAME);
-        
-        const adminDb = client.db().admin();
-        const dbs = await adminDb.listDatabases();
-        if (dbs.databases.some(d => d.name === DB_NAME)) {
-            console.log(`⚠️  Deleting existing database: ${DB_NAME}`);
-            await db.dropDatabase();
+      const collection = this.db.collection(collectionName);
+      const wsClients = this.wsClients;
+      let buffer = [];
+      let count = 0;
+      
+      const stream = fs.createReadStream(jsonPath, { encoding: 'utf8' })
+        .pipe(JSONStream.parse('*'))
+        .pipe(es.mapSync(data => {
+          buffer.push(EJSON.parse(EJSON.stringify(data)));
+          
+          if (buffer.length >= BATCH_SIZE) {
+            stream.pause();
+            collection.insertMany(buffer)
+              .then(() => {
+                count += buffer.length;
+                buffer = [];
+                sendWsMessage(wsClients, 'import:progress', {
+                  collection: collectionName,
+                  count: count
+                });
+                stream.resume();
+              })
+              .catch(reject);
+          }
+          return data;
+        }));
+
+      stream.on('end', async () => {
+        if (buffer.length > 0) {
+          await collection.insertMany(buffer);
+          count += buffer.length;
+          sendWsMessage(wsClients, 'import:progress', {
+            collection: collectionName,
+            count: count
+          });
         }
-        const importJsonBound = importJsonToMongo.bind({ db });
+        console.log(`  ↳ Insertados ${count} documentos en '${collectionName}'`);
+        resolve();
+      });
 
-        const zipFiles = (await readdir(ZIP_FOLDER))
-            .filter(f => f.endsWith('.zip'));
-        const totalZips = zipFiles.length;
-
-        for (let i = 0; i < zipFiles.length; i++) {
-            const zipFile = zipFiles[i];
-            const zipPath = path.join(ZIP_FOLDER, zipFile);
-            const tempDir = path.join(os.tmpdir(), `cbd-import-${uuidv4()}`);
-            
-            await mkdir(tempDir, { recursive: true });
-
-            try {
-                await processZip(zipPath, tempDir, i + 1, totalZips, importJsonBound);
-            } finally {
-                await rm(tempDir, { recursive: true, force: true });
-            }
-        }
-        
-        console.log('\n✅ Import completed successfully.');
+      stream.on('error', reject);
+      
     } catch (error) {
-        console.error('❌ Error during import:', error);
-        process.exit(1);
-    } finally {
-        await client.close();
+      reject(error);
     }
+  });
+}
+
+async function processZip(zipPath, tempDir, index, totalZips, importFunction, wsClients) {
+  console.log(`\n[${index}/${totalZips}] Procesando ZIP: ${path.basename(zipPath)}`);
+  
+  const zip = new AdmZip(zipPath);
+  zip.extractAllTo(tempDir, true);
+
+  const files = await fs.promises.readdir(tempDir);
+  const jsonFiles = files.filter(f => path.extname(f) === '.json');
+  
+  for (const jsonFile of jsonFiles) {
+    const jsonPath = path.join(tempDir, jsonFile);
+    const filename = path.basename(jsonFile, '.json');
+    const collectionName = filename.replace(/^cbd\./, '');
+    
+    console.log(`  → Procesando archivo: ${jsonFile} → colección '${collectionName}'`);
+    sendWsMessage(wsClients, 'import:file', {
+      file: jsonFile,
+      collection: collectionName
+    });
+    await importFunction(jsonPath, collectionName);
+  }
+}
+
+async function runImport(wsClients) {
+  const client = new MongoClient(MONGO_URI);
+  
+  try {
+    await client.connect();
+    const db = client.db(DB_NAME);
+    
+    const adminDb = client.db().admin();
+    const dbs = await adminDb.listDatabases();
+    if (dbs.databases.some(d => d.name === DB_NAME)) {
+      console.log(`⚠️  Eliminando base de datos existente: ${DB_NAME}`);
+      await db.dropDatabase();
+    }
+
+    const importJsonBound = importJsonToMongo.bind({ db, wsClients });
+
+    const zipFiles = (await readdir(ZIP_FOLDER))
+      .filter(f => f.endsWith('.zip'));
+    const totalZips = zipFiles.length;
+
+    sendWsMessage(wsClients, 'import:start', { totalZips });
+
+    for (let i = 0; i < zipFiles.length; i++) {
+      const zipFile = zipFiles[i];
+      const zipPath = path.join(ZIP_FOLDER, zipFile);
+      const tempDir = path.join(os.tmpdir(), `cbd-import-${uuidv4()}`);
+      
+      await mkdir(tempDir, { recursive: true });
+
+      sendWsMessage(wsClients, 'import:zip', {
+        current: i + 1,
+        total: totalZips,
+        file: zipFile
+      });
+
+      try {
+        await processZip(zipPath, tempDir, i + 1, totalZips, importJsonBound, wsClients);
+      } finally {
+        await rm(tempDir, { recursive: true, force: true });
+      }
+    }
+    
+    sendWsMessage(wsClients, 'import:done', { message: '✅ Importación completada' });
+    console.log('\n✅ Importación completada exitosamente.');
+  } catch (error) {
+    console.error('❌ Error durante la importación:', error);
+    sendWsMessage(wsClients, 'import:error', { error: error.message });
+  } finally {
+    await client.close();
+  }
 }
 
 module.exports = runImport;

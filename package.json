@@ -23,6 +23,8 @@
     "csv-parser": "^3.2.0",
     "dotenv": "^16.5.0",
     "event-stream": "^4.0.1",
+    "events": "^3.3.0",
+    "eventsource": "^3.0.6",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
     "gr11-hb03-expressmongoose-api": "file:",
@@ -30,8 +32,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.16.0",
     "mongoose": "^8.10.1",
+    "socket.io": "^4.8.1",
     "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-dist": "^5.21.0",
     "swagger-ui-express": "^5.0.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "ws": "^8.18.1"
   }
 }

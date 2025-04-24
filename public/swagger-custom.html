@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentación de Mi API</title>
+    <link rel="stylesheet" href="/swagger-ui/swagger-ui.css">
+    <style>
+        /* Estilos existentes */
+        .custom-header { /* Mantener mismos estilos */ }
+        .custom-footer { /* Mantener mismos estilos */ }
+        
+        /* Panel de progreso mejorado */
+        #progreso-importacion {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 9999;
+            max-width: 350px;
+            border: 1px solid #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
+            display: none;
+        }
+        
+        .evento-item {
+            margin: 10px 0;
+            padding: 12px;
+            background: #ffffff;
+            border-radius: 6px;
+            border-left: 4px solid;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .collection-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .evento-meta {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .evento-tipo {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        
+        /* Colores por tipo de evento */
+        .import-start { border-color: #3498db; }
+        .import-zip { border-color: #9b59b6; }
+        .import-file { border-color: #2ecc71; }
+        .import-progress { border-color: #f1c40f; }
+        .import-done { border-color: #27ae60; }
+        .import-error { border-color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div id="progreso-importacion">
+        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">🚀 Progreso de Importación</h3>
+        <div id="eventos-container"></div>
+    </div>
+
+    <div class="custom-header">
+        <h1>Mi API Personalizada</h1>
+        <p>Documentación técnica para desarrolladores</p>
+    </div>
+
+    <div id="swagger-ui"></div>
+
+    <div class="custom-footer">
+        <p>© 2023 Mi Empresa. Todos los derechos reservados.</p>
+    </div>
+
+    <script src="/swagger-ui/swagger-ui-bundle.js"></script>
+    <script>
+        // Configuración de Swagger
+        window.onload = () => {
+            window.ui = SwaggerUIBundle({
+                url: '/api-docs.json',
+                dom_id: '#swagger-ui',
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.SwaggerUIStandalonePreset
+                ],
+                layout: "BaseLayout",
+                deepLinking: true
+            });
+        };
+
+        // WebSocket Client
+        const socket = new WebSocket('ws://localhost:3000');
+        let hidePanelTimeout = null;
+
+        const createEventElement = (data) => {
+            const eventoDiv = document.createElement('div');
+            eventoDiv.className = `evento-item ${data.event.replace(':', '-')}`;
+            
+            const timestamp = new Date().toLocaleTimeString();
+            
+            let content = '';
+            switch(data.event) {
+                case 'import:start':
+                    content = `
+                        <div class="evento-tipo">INICIO DE IMPORTACIÓN</div>
+                        <div>Total de archivos ZIP: ${data.data.totalZips}</div>
+                    `;
+                    break;
+                    
+                case 'import:zip':
+                    content = `
+                        <div class="evento-tipo">PROCESANDO ZIP</div>
+                        <div>Archivo: ${data.data.file}</div>
+                        <div>Progreso: ${data.data.current}/${data.data.total}</div>
+                    `;
+                    break;
+                    
+                case 'import:file':
+                    content = `
+                        <div class="evento-tipo">ARCHIVO DETECTADO</div>
+                        <div class="collection-name">${data.data.collection}</div>
+                        <div>Archivo: ${data.data.file}</div>
+                    `;
+                    break;
+                    
+                case 'import:progress':
+                    content = `
+                        <div class="evento-tipo">INSERTANDO DATOS</div>
+                        <div class="collection-name">${data.data.collection}</div>
+                        <div>Documentos insertados: ${data.data.count.toLocaleString()}</div>
+                    `;
+                    break;
+                    
+                case 'import:done':
+                    content = `
+                        <div class="evento-tipo">IMPORTACIÓN COMPLETADA</div>
+                        <div>${data.data.message}</div>
+                    `;
+                    break;
+                    
+                case 'import:error':
+                    content = `
+                        <div class="evento-tipo">ERROR</div>
+                        <div style="color: #e74c3c;">${data.data.error}</div>
+                    `;
+                    break;
+            }
+            
+            eventoDiv.innerHTML = `
+                ${content}
+                <div class="evento-meta">
+                    <span>${timestamp}</span>
+                    <span>${data.event}</span>
+                </div>
+            `;
+            
+            return eventoDiv;
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                const panel = document.getElementById('progreso-importacion');
+                const { event: eventType, data } = JSON.parse(event.data);
+                
+                // Mostrar panel
+                panel.style.display = 'block';
+                
+                // Resetear temporizador de ocultación
+                if(hidePanelTimeout) clearTimeout(hidePanelTimeout);
+                hidePanelTimeout = setTimeout(() => {
+                    panel.style.display = 'none';
+                }, 10000); // 10 segundos de inactividad
+
+                // Agregar nuevo evento
+                const eventoContainer = document.getElementById('eventos-container');
+                const newEvent = createEventElement({ event: eventType, data });
+                
+                // Mantener máximo 5 eventos visibles
+                if(eventoContainer.children.length >= 1) {
+                    eventoContainer.removeChild(eventoContainer.lastChild);
+                }
+                eventoContainer.insertBefore(newEvent, eventoContainer.firstChild);
+
+            } catch(error) {
+                console.error('Error procesando evento:', error);
+            }
+        };
+
+        socket.onerror = (error) => {
+            console.error('Error de conexión WebSocket:', error);
+            document.getElementById('progreso-importacion').innerHTML = `
+                <div style="color: #e74c3c;">Error de conexión: ${error.message}</div>
+            `;
+        };
+    </script>
+</body>
+</html>

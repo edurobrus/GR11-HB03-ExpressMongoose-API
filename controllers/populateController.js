@@ -1,16 +1,18 @@
-// controllers/populateController.js
 const runImport = require('../seeder');
 
-exports.populateDatabase = async (req, res) => {
+exports.triggerImport = async (wsClients) => {
   try {
-    await runImport();
-    res.status(200).json({ message: 'Import completed successfully.' });
+    await runImport(wsClients);
   } catch (error) {
-    console.error('Error during import:', error);
-
-    return res.status(500).json({
-      error: 'Error during import.',
-      details: error.message || 'An unexpected error occurred.'
+    console.error('Error al iniciar importación:', error);
+    const message = JSON.stringify({
+      event: 'import:error',
+      data: { error: error.message }
+    });
+    wsClients.forEach(client => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
     });
   }
 };

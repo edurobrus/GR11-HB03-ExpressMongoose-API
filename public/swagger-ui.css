@@ -1,0 +1,11 @@
+.swagger-ui .topbar {
+    display: none; /* Oculta el header por defecto de Swagger */
+}
+
+.opblock-summary {
+    background-color: #f8f9fa !important;
+}
+
+.model {
+    background-color: #e9ecef !important;
+}

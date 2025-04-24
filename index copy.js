@@ -1,16 +1,17 @@
 const express = require('express');
-const WebSocket = require('ws'); // Importamos el módulo ws
+const WebSocket = require('ws');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const path = require('path');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const jwt = require('jsonwebtoken'); // Añadir esta línea
 
 dotenv.config();
 
 const app = express();
-const server = require('http').createServer(app); // Usamos un servidor HTTP para WebSocket
-const wss = new WebSocket.Server({ server }); // WebSocket Server
+const server = require('http').createServer(app);
+const wss = new WebSocket.Server({ noServer: true }); // WebSocket Server
 
 // Conectar a la base de datos
 connectDB().catch(err => {
@@ -46,7 +47,9 @@ const routes = {
   cities: require("./routes/cityRoutes"),
   restaurants: require("./routes/restaurantRoutes"),
   locations: require("./routes/locationRoutes"),
-  users: require("./routes/userRoutes")
+  auth: require("./routes/authRoutes"),
+  users: require("./routes/userRoutes"),
+  messages: require("./routes/messageRoutes")
 };
 
 // Route declarations
@@ -55,20 +58,55 @@ app.use("/api/achievements", routes.achievements);
 app.use("/api/cities", routes.cities);
 app.use("/api/restaurants", routes.restaurants);
 app.use("/api/locations", routes.locations);
+app.use("/api/auth", routes.auth);
 app.use("/api/users", routes.users);
+app.use("/api/messages", routes.messages);
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
-// WebSocket: Maneja las conexiones y almacena clientes
 const wsClients = [];
-app.locals.wsClients = wsClients; // Hacer accesible en toda la app
+app.locals.wsClients = wsClients;
 
-wss.on('connection', (ws) => {
-  console.log('Nuevo cliente WebSocket conectado.');
-  wsClients.push(ws);
+server.on('upgrade', (request, socket, head) => {
+  // 1. Extraer token de los headers
+  const authHeader = request.headers['authorization'];
+  
+  // 2. Verificar presencia del token
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+    socket.destroy();
+    return;
+  }
 
-  // Eliminar cliente al desconectarse
-  ws.on('close', () => {
-    const index = wsClients.indexOf(ws);
-    if (index !== -1) wsClients.splice(index, 1);
+  // 3. Validar token JWT
+  const token = authHeader.split(' ')[1];
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      socket.write('HTTP/1.1 403 Forbidden\r\n\r\n');
+      socket.destroy();
+      return;
+    }
+
+    // 4. Autenticación exitosa - manejar upgrade
+    wss.handleUpgrade(request, socket, head, (ws) => {
+      // 5. Almacenar conexión y metadata del usuario
+      ws.user = decoded;
+      wsClients.push(ws);
+      
+      // 6. Configurar handlers de eventos
+      ws.on('close', () => {
+        const index = wsClients.indexOf(ws);
+        if (index !== -1) wsClients.splice(index, 1);
+      });
+
+      // 7. Notificar conexión exitosa
+      console.log(`Nuevo cliente autenticado: ${ws.user.userId}`);
+      ws.send(JSON.stringify({
+        event: 'connection:success',
+        data: { userId: ws.user.userId }
+      }));
+    });
   });
 });
 
