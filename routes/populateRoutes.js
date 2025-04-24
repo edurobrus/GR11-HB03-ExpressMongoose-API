@@ -8,9 +8,9 @@ const populateController = require('../controllers/populateController');
  *   post:
  *     tags:
  *       - Data Import
- *     summary: Inicia la importación de datos desde archivos ZIP
+ *     summary: Inicia la importación de datos desde archivos
  *     description: |
- *       Inicia el proceso de importación de datos a MongoDB desde archivos ZIP.
+ *       Inicia el proceso de importación de datos a MongoDB desde archivos.
  *       
  *       **Flujo de comunicación:**
  *       1. Ejecuta este endpoint para iniciar la importación

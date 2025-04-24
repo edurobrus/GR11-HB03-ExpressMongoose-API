@@ -1,4 +1,5 @@
-const runImport = require('../seeder');
+// controllers/populateController.js
+const runImport = require('../scripts/seeder.js');
 
 exports.triggerImport = async (wsClients) => {
   try {

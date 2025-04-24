@@ -30,6 +30,9 @@ MONGO_URI=mongodb://localhost:27017/tu_base_de_datos
 
 ### 4. Ejecutar el servidor
 ```bash
+npm run setup
+```
+```bash
 npm start
 ```
 El servidor se iniciará en `http://localhost:3000`
@@ -40,47 +43,21 @@ El servidor se iniciará en `http://localhost:3000`
 ```
 GR11-HB03-ExpressMongoose-API/
 ├── config/
-│   └── db.js
-│   └── swaggerConfig.js
+│   └── ... Archivos de configuración
 ├── controllers/
-│   └── achievementController.js
-│   └── authController.js
-│   └── cityController.js
-│   └── locationController.js
-│   └── messageController.js
-│   └── populateController.js
-│   └── restaurantController.js
-│   └── userController.js
+│   └── ... Colecciones de request handlers
 ├── data/
-│   └── achievements.zip
-│   └── locations.zip
-│   └── messages.zip
-│   └── userachievements.zip
-│   └── users.zip
+│   └── ... Conjuntos de datos
 ├── docs/
 ├── middlewares/
-│   └── authenticateJWT.js
+│   └── ... 
 ├── models/
-│   └── Achievement.js
-│   └── Event.js
-│   └── Location.js
-│   └── Message.js
-│   └── PaymentMethod.js
-│   └── StripeWebhook.js
-│   └── Transaction.js
-│   └── User.js
-│   └── UserAchievement.js
+│   └── ... Modelos de Mongoose
 ├── routes/
-│   └── achievementRoutes.js
-│   └── authRoutes.js
-│   └── cityRoutes.js
-│   └── locationRoutes.js
-│   └── messageRoutes.js
-│   └── populateRoutes.js
-│   └── restaurantRoutes.js
-│   └── userRoutes.js
+│   └── ... Rutas de Express
+├── scripts/
+│   └── ... Scripts de setup
 ├── index.js
-├── seeder.js
 ├── package.json
 ├── package-lock.json
 ├── .env.local.example
@@ -155,7 +132,7 @@ O usar **Postman** para ver los restaurantes en la base de datos.
 | GET    | `/api/users/me/friends` | Obtiene las amistades de un usuario   |
 | POST    | `/api/users/me/friends` | Añade a un usuario a tu lista de amigos   |
 | DELETE    | `/api/users/me/friends/:friendId` | Elimina a un usuario de tu lista de amigos |
-| POST   | `/api/populate`  | Importa los datos de los archivos ZIP        |
+| POST   | `/api/populate`  | Importa los datos de los archivos        |
 
 ---
 
