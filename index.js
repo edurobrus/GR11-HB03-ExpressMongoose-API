@@ -46,6 +46,7 @@ const routes = {
   cities: require("./routes/cityRoutes"),
   restaurants: require("./routes/restaurantRoutes"),
   locations: require("./routes/locationRoutes"),
+  users: require("./routes/userRoutes"),
   messages: require("./routes/messageRoutes")
 
 };
