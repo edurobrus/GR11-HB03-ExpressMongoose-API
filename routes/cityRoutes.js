@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const cityController = require("../controllers/cityController");
 const authenticateJWT = require('../middlewares/authenticateJWT');
-const { check, validationResult } = require('express-validator');  // Para validaciones
 
 /**
  * @swagger
