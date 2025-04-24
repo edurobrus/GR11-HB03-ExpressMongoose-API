@@ -132,7 +132,7 @@ O usar **Postman** para ver los restaurantes en la base de datos.
 | GET    | `/api/users/me/friends` | Obtiene las amistades de un usuario   |
 | POST    | `/api/users/me/friends` | Añade a un usuario a tu lista de amigos   |
 | DELETE    | `/api/users/me/friends/:friendId` | Elimina a un usuario de tu lista de amigos |
-| POST   | `/api/populate`  | Importa los datos de los archivos ZIP        |
+| POST   | `/api/populate`  | Importa los datos de los archivos        |
 
 ---
 
