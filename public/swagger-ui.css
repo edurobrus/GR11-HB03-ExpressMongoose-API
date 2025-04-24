@@ -169,3 +169,175 @@
             padding: 1rem;
         }
     }
+
+
+    /* Estilos generales */
+    :root {
+        --color-primary: #2c3e50;
+        --color-secondary: #3498db;
+        --color-success: #27ae60;
+        --color-warning: #f1c40f;
+        --color-danger: #e74c3c;
+        --text-primary: #2c3e50;
+        --text-secondary: #7f8c8d;
+        --border-radius: 8px;
+        --box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Panel de progreso - Estilo profesional */
+    #progreso-importacion {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        z-index: 9999;
+        max-width: 400px;
+        border: 1px solid #e0e0e0;
+        font-family: 'Inter', system-ui, sans-serif;
+        display: none;
+        transition: all 0.3s ease;
+    }
+
+    #progreso-importacion h3 {
+        margin: 0 0 15px 0;
+        color: var(--color-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #progreso-importacion h3::before {
+        content: '🚀';
+        font-size: 1.2em;
+    }
+
+    .evento-item {
+        margin: 12px 0;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: var(--border-radius);
+        border-left: 4px solid;
+        transition: transform 0.2s ease;
+    }
+
+    .evento-item:hover {
+        transform: translateX(5px);
+    }
+
+    .evento-tipo {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+        color: var(--text-secondary);
+    }
+
+    .collection-name {
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: 4px;
+        font-size: 0.95rem;
+    }
+
+    .evento-meta {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    /* Colores de eventos */
+    .import-start { border-color: var(--color-secondary); }
+    .import-zip { border-color: #9b59b6; }
+    .import-file { border-color: var(--color-success); }
+    .import-progress { border-color: var(--color-warning); }
+    .import-done { border-color: var(--color-success); }
+    .import-error { border-color: var(--color-danger); }
+
+    /* Override de estilos Swagger UI */
+    .swagger-ui .topbar {
+        display: none;
+    }
+
+    .swagger-ui .information-container {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        margin: 20px;
+        box-shadow: var(--box-shadow);
+    }
+
+    .swagger-ui .opblock {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: var(--border-radius);
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .swagger-ui .opblock-tag {
+        font-size: 1.1rem;
+        color: var(--color-primary);
+        padding: 1rem;
+        background: #f8f9fa;
+        border-bottom: 2px solid var(--color-secondary);
+    }
+
+    .swagger-ui .opblock-summary {
+        background-color: #ffffff !important;
+        padding: 1rem;
+    }
+
+    .swagger-ui .opblock-summary-control:hover {
+        background: #f8f9fa;
+    }
+
+    .swagger-ui .model {
+        background-color: #f8f9fa !important;
+        border-radius: var(--border-radius);
+        padding: 1rem;
+    }
+
+    .swagger-ui .btn.authorize {
+        background: var(--color-secondary);
+        border-color: var(--color-secondary);
+        color: white;
+    }
+
+    .swagger-ui .btn.authorize svg {
+        fill: white;
+    }
+
+    /* Estado de error */
+    .import-error {
+        background: #fee;
+        border-color: var(--color-danger);
+    }
+
+    .import-error .evento-tipo {
+        color: var(--color-danger);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        #progreso-importacion {
+            max-width: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 10px;
+            right: auto;
+        }
+        
+        .swagger-ui .information-container {
+            margin: 10px;
+            padding: 1rem;
+        }
+    }
