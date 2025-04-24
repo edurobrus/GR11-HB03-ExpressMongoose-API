@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>LocateMate</title>
+    <link rel="icon" href="/swagger-ui/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/swagger-ui/icon.png">
+    <link rel="stylesheet" href="/swagger-ui/swagger-ui.css">
+    <style>
+        /* Estilos existentes */
+        .custom-header { /* Mantener mismos estilos */ }
+        .custom-footer { /* Mantener mismos estilos */ }
+        
+        /* Panel de progreso mejorado */
+        #progreso-importacion {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 9999;
+            max-width: 350px;
+            border: 1px solid #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
+            display: none;
+        }
+        
+        .evento-item {
+            margin: 10px 0;
+            padding: 12px;
+            background: #ffffff;
+            border-radius: 6px;
+            border-left: 4px solid;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .collection-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .evento-meta {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .evento-tipo {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        
+        /* Colores por tipo de evento */
+        .import-start { border-color: #3498db; }
+        .import-zip { border-color: #9b59b6; }
+        .import-file { border-color: #2ecc71; }
+        .import-progress { border-color: #f1c40f; }
+        .import-done { border-color: #27ae60; }
+        .import-error { border-color: #e74c3c; }
+    /* Estilos generales */
+    :root {
+        --color-primary: #2c3e50;
+        --color-secondary: #3498db;
+        --color-success: #27ae60;
+        --color-warning: #f1c40f;
+        --color-danger: #e74c3c;
+        --text-primary: #2c3e50;
+        --text-secondary: #7f8c8d;
+        --border-radius: 8px;
+        --box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Panel de progreso - Estilo profesional */
+    #progreso-importacion {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        z-index: 9999;
+        max-width: 400px;
+        border: 1px solid #e0e0e0;
+        font-family: 'Inter', system-ui, sans-serif;
+        display: none;
+        transition: all 0.3s ease;
+    }
+
+    #progreso-importacion h3 {
+        margin: 0 0 15px 0;
+        color: var(--color-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #progreso-importacion h3::before {
+        content: '🚀';
+        font-size: 1.2em;
+    }
+
+    .evento-item {
+        margin: 12px 0;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: var(--border-radius);
+        border-left: 4px solid;
+        transition: transform 0.2s ease;
+    }
+
+    .evento-item:hover {
+        transform: translateX(5px);
+    }
+
+    .evento-tipo {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+        color: var(--text-secondary);
+    }
+
+    .collection-name {
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: 4px;
+        font-size: 0.95rem;
+    }
+
+    .evento-meta {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    /* Colores de eventos */
+    .import-start { border-color: var(--color-secondary); }
+    .import-zip { border-color: #9b59b6; }
+    .import-file { border-color: var(--color-success); }
+    .import-progress { border-color: var(--color-warning); }
+    .import-done { border-color: var(--color-success); }
+    .import-error { border-color: var(--color-danger); }
+
+    /* Override de estilos Swagger UI */
+    .swagger-ui .topbar {
+        display: none;
+    }
+
+    .swagger-ui .information-container {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        margin: 20px;
+        box-shadow: var(--box-shadow);
+    }
+
+    .swagger-ui .opblock {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: var(--border-radius);
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .swagger-ui .opblock-tag {
+        font-size: 1.1rem;
+        color: var(--color-primary);
+        padding: 1rem;
+        background: #f8f9fa;
+        border-bottom: 2px solid var(--color-secondary);
+    }
+
+    .swagger-ui .opblock-summary {
+        background-color: #ffffff !important;
+        padding: 1rem;
+    }
+
+    .swagger-ui .opblock-summary-control:hover {
+        background: #f8f9fa;
+    }
+
+    .swagger-ui .model {
+        background-color: #f8f9fa !important;
+        border-radius: var(--border-radius);
+        padding: 1rem;
+    }
+
+    .swagger-ui .btn.authorize {
+        background: var(--color-secondary);
+        border-color: var(--color-secondary);
+        color: white;
+    }
+
+    .swagger-ui .btn.authorize svg {
+        fill: white;
+    }
+
+    /* Estado de error */
+    .import-error {
+        background: #fee;
+        border-color: var(--color-danger);
+    }
+
+    .import-error .evento-tipo {
+        color: var(--color-danger);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        #progreso-importacion {
+            max-width: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 10px;
+            right: auto;
+        }
+        
+        .swagger-ui .information-container {
+            margin: 10px;
+            padding: 1rem;
+        }
+    }
+    :root {
+    --color-primary: #2c3e50;
+    --color-secondary: #3498db;
+    --text-light: #ffffff;
+    --spacing-medium: 2rem;
+    --spacing-large: 4rem;
+}
+
+.custom-header {
+    background: linear-gradient(135deg, var(--color-primary), #1a252f);
+    color: var(--text-light);
+    padding: var(--spacing-large) 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--spacing-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-header p {
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.custom-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--color-secondary);
+    animation: header-line 1s ease-out;
+}
+
+@keyframes header-line {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.custom-footer {
+    background: #f8f9fa;
+    color: var(--color-primary);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+    margin-top: var(--spacing-large);
+    font-size: 0.9rem;
+    position: sticky;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+.custom-footer p {
+    margin: 0;
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.custom-footer a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.custom-footer a:hover {
+    color: #1a73e8;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .custom-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .custom-header h1 {
+        font-size: 2rem;
+    }
+    
+    .custom-header p {
+        font-size: 1rem;
+    }
+    
+    .custom-footer {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="progreso-importacion">
+        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
+        <div id="eventos-container"></div>
+    </div>
+
+    <div class="custom-header">
+        <img src="/swagger-ui/icon.png" alt="LocateMate Icon" style="height: 200px; vertical-align: middle; margin-right: 10px;">
+        <h1 style="margin: 15px; color: #ffffff;">To find your site with API</h1>
+    </div>
+    
+
+    <div id="swagger-ui"></div>
+
+    <div class="custom-footer">
+        <p>© 2023 HB03. Todos los derechos reservados.</p>
+    </div>
+
+    <script src="/swagger-ui/swagger-ui-bundle.js"></script>
+    <script>
+        // Configuración de Swagger
+        window.onload = () => {
+            window.ui = SwaggerUIBundle({
+                url: '/api-docs.json',
+                dom_id: '#swagger-ui',
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.SwaggerUIStandalonePreset
+                ],
+                layout: "BaseLayout",
+                deepLinking: true
+            });
+        };
+
+        // WebSocket Client
+        const socket = new WebSocket('ws://localhost:3000');
+        let hidePanelTimeout = null;
+
+        const createEventElement = (data) => {
+            const eventoDiv = document.createElement('div');
+            eventoDiv.className = `evento-item ${data.event.replace(':', '-')}`;
+            
+            const timestamp = new Date().toLocaleTimeString();
+            
+            let content = '';
+            switch(data.event) {
+                case 'import:start':
+                    content = `
+                        <div class="evento-tipo">INICIO DE IMPORTACIÓN</div>
+                        <div>Total de archivos ZIP: ${data.data.totalZips}</div>
+                    `;
+                    break;
+                    
+                case 'import:zip':
+                    content = `
+                        <div class="evento-tipo">PROCESANDO ZIP</div>
+                        <div>Archivo: ${data.data.file}</div>
+                        <div>Progreso: ${data.data.current}/${data.data.total}</div>
+                    `;
+                    break;
+                    
+                case 'import:file':
+                    content = `
+                        <div class="evento-tipo">ARCHIVO DETECTADO</div>
+                        <div class="collection-name">${data.data.collection}</div>
+                        <div>Archivo: ${data.data.file}</div>
+                    `;
+                    break;
+                    
+                case 'import:progress':
+                    content = `
+                        <div class="evento-tipo">INSERTANDO DATOS</div>
+                        <div class="collection-name">${data.data.collection}</div>
+                        <div>Documentos insertados: ${data.data.count.toLocaleString()}</div>
+                    `;
+                    break;
+                    
+                case 'import:done':
+                    content = `
+                        <div class="evento-tipo">IMPORTACIÓN COMPLETADA</div>
+                        <div>${data.data.message}</div>
+                    `;
+                    break;
+                    
+                case 'import:error':
+                    content = `
+                        <div class="evento-tipo">ERROR</div>
+                        <div style="color: #e74c3c;">${data.data.error}</div>
+                    `;
+                    break;
+            }
+            
+            eventoDiv.innerHTML = `
+                ${content}
+                <div class="evento-meta">
+                    <span>${timestamp}</span>
+                    <span>${data.event}</span>
+                </div>
+            `;
+            
+            return eventoDiv;
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                const panel = document.getElementById('progreso-importacion');
+                const { event: eventType, data } = JSON.parse(event.data);
+                
+                // Mostrar panel
+                panel.style.display = 'block';
+                
+                // Resetear temporizador de ocultación
+                if(hidePanelTimeout) clearTimeout(hidePanelTimeout);
+                hidePanelTimeout = setTimeout(() => {
+                    panel.style.display = 'none';
+                }, 10000); // 10 segundos de inactividad
+
+                // Agregar nuevo evento
+                const eventoContainer = document.getElementById('eventos-container');
+                const newEvent = createEventElement({ event: eventType, data });
+                
+                // Mantener máximo 5 eventos visibles
+                if(eventoContainer.children.length >= 1) {
+                    eventoContainer.removeChild(eventoContainer.lastChild);
+                }
+                eventoContainer.insertBefore(newEvent, eventoContainer.firstChild);
+
+            } catch(error) {
+                console.error('Error procesando evento:', error);
+            }
+        };
+
+        socket.onerror = (error) => {
+            console.error('Error de conexión WebSocket:', error);
+            document.getElementById('progreso-importacion').innerHTML = `
+                <div style="color: #e74c3c;">Error de conexión: ${error.message}</div>
+            `;
+        };
+    </script>
+</body>
+</html>

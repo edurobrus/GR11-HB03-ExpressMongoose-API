@@ -20,10 +20,6 @@ cd GR11-HB03-ExpressMongoose-API
 ```bash
 npm install
 ```
-```bash
-npm install adm-zip
-```
-* Este paquete permite descomprimir los archivos zip de la carpeta data a la hora de popular la base de datos.
 
 ### 3. Configurar variables de entorno
 Crea un archivo `.env` en la raíz del proyecto y define las siguientes variables:
@@ -33,6 +29,9 @@ MONGO_URI=mongodb://localhost:27017/tu_base_de_datos
 ```
 
 ### 4. Ejecutar el servidor
+```bash
+npm run setup
+```
 ```bash
 npm start
 ```
@@ -44,47 +43,21 @@ El servidor se iniciará en `http://localhost:3000`
 ```
 GR11-HB03-ExpressMongoose-API/
 ├── config/
-│   └── db.js
-│   └── swaggerConfig.js
+│   └── ... Archivos de configuración
 ├── controllers/
-│   └── achievementController.js
-│   └── authController.js
-│   └── cityController.js
-│   └── locationController.js
-│   └── messageController.js
-│   └── populateController.js
-│   └── restaurantController.js
-│   └── userController.js
+│   └── ... Colecciones de request handlers
 ├── data/
-│   └── achievements.zip
-│   └── locations.zip
-│   └── messages.zip
-│   └── userachievements.zip
-│   └── users.zip
+│   └── ... Conjuntos de datos
 ├── docs/
 ├── middlewares/
-│   └── authenticateJWT.js
+│   └── ... 
 ├── models/
-│   └── Achievement.js
-│   └── Event.js
-│   └── Location.js
-│   └── Message.js
-│   └── PaymentMethod.js
-│   └── StripeWebhook.js
-│   └── Transaction.js
-│   └── User.js
-│   └── UserAchievement.js
+│   └── ... Modelos de Mongoose
 ├── routes/
-│   └── achievementRoutes.js
-│   └── authRoutes.js
-│   └── cityRoutes.js
-│   └── locationRoutes.js
-│   └── messageRoutes.js
-│   └── populateRoutes.js
-│   └── restaurantRoutes.js
-│   └── userRoutes.js
+│   └── ... Rutas de Express
+├── scripts/
+│   └── ... Scripts de setup
 ├── index.js
-├── seeder.js
 ├── package.json
 ├── package-lock.json
 ├── .env.local.example
