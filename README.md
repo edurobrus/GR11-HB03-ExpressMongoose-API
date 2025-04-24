@@ -44,8 +44,10 @@ GR11-HB03-ExpressMongoose-API/
 │   └── swaggerConfig.js
 ├── controllers/
 │   └── achievementController.js
+│   └── authController.js
 │   └── cityController.js
 │   └── locationController.js
+│   └── messageController.js
 │   └── populateController.js
 │   └── restaurantController.js
 │   └── userController.js
@@ -56,6 +58,8 @@ GR11-HB03-ExpressMongoose-API/
 │   └── userachievements.zip
 │   └── users.zip
 ├── docs/
+├── middlewares/
+│   └── authenticateJWT.js
 ├── models/
 │   └── Achievement.js
 │   └── Event.js
@@ -68,9 +72,11 @@ GR11-HB03-ExpressMongoose-API/
 │   └── UserAchievement.js
 ├── routes/
 │   └── achievementRoutes.js
+│   └── authRoutes.js
 │   └── cityRoutes.js
 │   └── locationRoutes.js
-│   └── populatieRoutes.js
+│   └── messageRoutes.js
+│   └── populateRoutes.js
 │   └── restaurantRoutes.js
 │   └── userRoutes.js
 ├── index.js
@@ -123,28 +129,32 @@ O usar **Postman** para ver los restaurantes en la base de datos.
 | Método | Endpoint       | Descripción               |
 |--------|--------------|---------------------------|
 | GET    | `/api/achievements`  | Obtiene todos los logros  |
-| GET    | `/api/achievements/getById/:id`  | Obtiene el logro por su id  |
-| GET    | `/api/achievements/user/:userId`  | Obtiene todos los logros de un usuario  |
+| GET    | `/api/achievements/user`  | Obtiene todos mis logros  |
+| GET    | `/api/achievements/:id`  | Obtiene el logro por su id  |
+| POST    | `/api/auth/register`  | Registra a un nuevo usuario |
+| POST    | `/api/auth/login`  | Autentica al usuario |
 | GET    | `/api/cities`  | Obtiene todas las ciudades  |
-| POST   | `/api/cities`  | Crea una nueva ciudad      |
 | GET    | `/api/cities/nearby`  | Obtiene todas las ciudades cercanos   |
 | GET    | `/api/cities/:id` | Obtiene una ciudad por ID   |
-| PUT    | `/api/cities/:id` | Actualiza una ciudad por ID |
-| DELETE | `/api/cities/:id` | Elimina una ciudad por ID   |
 | GET    | `/api/locations`  | Obtiene todas las localizaciones  |
 | GET    | `/api/locations/nearby`  | Obtiene todas las localizaciones cercanas  |
 | GET    | `/api/locations/top-rated`  | Obtiene las 5 localizaciones mejor puntuadas  |
 | GET    | `/api/locations/most-voted`  | Obtiene las 5 localizaciones más votadas  |
 | GET    | `/api/locations/:id` | Obtiene una localización por ID   |
 | GET    | `/api/locations/:id/rated` | Actualiza la puntuación media de la localización  |
+| POST    | `/api/messages`  | Crea un nuevo mensaje  |
+| GET    | `/api/messages/sent`  | Obtiene todos los mensajes enviados por el usuario  |
+| GET    | `/api/messages/received`  | Obtiene todos los mensajes recibidos por el usuario  |
+| PATCH    | `/api/messages/status/:id` | Actualiza el estado del mensaje   |
+| DELETE    | `/api/messages/:id` | Elimina un mensaje por su id  |
 | GET    | `/api/restaurants`  | Obtiene todos los restaurantes   |
-| POST   | `/api/restaurants`  | Crea un nuevo restaurante        |
 | GET    | `/api/restaurants/nearby`  | Obtiene todos los restaurantes cercanos   |
 | GET    | `/api/restaurants/:id` | Obtiene un restaurante por ID   |
-| PUT    | `/api/restaurants/:id` | Actualiza un restaurante por ID |
-| DELETE | `/api/restaurants/:id` | Elimina un restaurante por ID   |
-| POST    | `/api/users` | Crea un nuevo usuario   |
-| PUT    | `/api/users/:id` | Actualiza un usuario por id |
+| GET    | `/api/users/me` | Obtiene el perfil del usuario   |
+| PUT    | `/api/users/me` | Actualiza el perfil del usuario |
+| GET    | `/api/users/me/friends` | Obtiene las amistades de un usuario   |
+| POST    | `/api/users/me/friends` | Añade a un usuario a tu lista de amigos   |
+| DELETE    | `/api/users/me/friends/:friendId` | Elimina a un usuario de tu lista de amigos |
 | POST   | `/api/populate`  | Importa los datos de los archivos ZIP        |
 
 ---

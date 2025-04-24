@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const locationController = require('../controllers/locationController');
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -21,31 +22,46 @@ const locationController = require('../controllers/locationController');
  *           description: Location ID
  *         name:
  *           type: string
+ *           description: Name of the location
  *         location:
  *           type: object
  *           properties:
  *             type:
  *               type: string
  *               enum: [Point]
+ *               description: Must be "Point"
  *             coordinates:
  *               type: array
  *               items:
  *                 type: number
  *               minItems: 2
  *               maxItems: 2
+ *               description: Coordinates in [longitude, latitude] format
  *         avg_rating:
  *           type: number
+ *           description: Average rating of the location
  *         total_ratings:
  *           type: number
+ *           description: Total number of ratings
  *         type:
  *           type: string
  *           enum: [CITY, RESTAURANT]
+ *           description: Whether it's a CITY or RESTAURANT
  *       required:
  *         - name
  *         - location
  *         - avg_rating
  *         - total_ratings
  *         - type
+ *       example:
+ *         _id: "661feaf8bc3e2a9c1234abcd"
+ *         name: "Le Petit Souffle"
+ *         location:
+ *           type: "Point"
+ *           coordinates: [121.027535, 14.565443]
+ *         avg_rating: 4.8
+ *         total_ratings: 314
+ *         type: "RESTAURANT"
  */
 
 /**
@@ -80,6 +96,8 @@ router.get('/', locationController.getLocations);
  *   get:
  *     summary: Get locations near the provided coordinates
  *     tags: [Locations]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: lat
@@ -112,7 +130,7 @@ router.get('/', locationController.getLocations);
  *       500:
  *         description: Server error
  */
-router.get('/nearby', locationController.getNearbyLocations);
+router.get('/nearby', authenticateJWT, locationController.getNearbyLocations);
 
 /**
  * @swagger
@@ -187,6 +205,8 @@ router.get('/:id', locationController.getLocationById);
  *   put:
  *     summary: Update the average rating of a location
  *     tags: [Locations]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -218,6 +238,6 @@ router.get('/:id', locationController.getLocationById);
  *       500:
  *         description: Server error
  */
-router.put('/:id/rating', locationController.updateLocationRating);
+router.put('/:id/rating', authenticateJWT, locationController.updateLocationRating);
 
 module.exports = router;

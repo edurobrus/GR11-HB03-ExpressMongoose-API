@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const achievementController = require("../controllers/achievementController");
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -57,7 +58,29 @@ router.get("/", achievementController.getAchievements);
 
 /**
  * @swagger
- * /api/achievements/getById/{id}:
+ * /api/achievements/user:
+ *   get:
+ *     summary: Get all my achievements
+ *     tags: [Achievements]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of achievements obtained by the user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Achievement'
+ *       404:
+ *         description: The user has no achievements
+ */
+router.get("/user", authenticateJWT, achievementController.getMyAchievements);
+
+/**
+ * @swagger
+ * /api/achievements/{id}:
  *   get:
  *     summary: Get achievement by ID
  *     tags: [Achievements]
@@ -77,33 +100,6 @@ router.get("/", achievementController.getAchievements);
  *       404:
  *         description: Achievement not found
  */
-router.get("/getById/:id", achievementController.getAchievementById);
-
-/**
- * @swagger
- * /api/achievements/user/{userId}:
- *   get:
- *     summary: Get all achievements of a user
- *     tags: [Achievements]
- *     parameters:
- *       - in: path
- *         name: userId
- *         schema:
- *           type: string
- *         required: true
- *         description: User ID
- *     responses:
- *       200:
- *         description: List of achievements obtained by the user
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Achievement'
- *       404:
- *         description: The user has no achievements
- */
-router.get("/user/:userId", achievementController.getAchievementsByUserId);
+router.get("/:id", achievementController.getAchievementById);
 
 module.exports = router;

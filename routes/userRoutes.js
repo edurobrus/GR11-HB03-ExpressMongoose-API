@@ -1,7 +1,7 @@
-// routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -12,52 +12,56 @@ const userController = require('../controllers/userController');
 
 /**
  * @swagger
- * /api/users:
- *   post:
- *     summary: Create a new user
+ * /api/users/me:
+ *   get:
+ *     summary: Get the user's profile
  *     tags: [Users]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - username
- *               - password
- *               - age
- *               - email
- *             properties:
- *               username:
- *                 type: string
- *               password:
- *                 type: string
- *               age:
- *                 type: integer
- *               email:
- *                 type: string
- *                 format: email
+ *     security:
+ *       - bearerAuth: []
  *     responses:
- *       201:
- *         description: User created successfully
+ *       200:
+ *         description: User profile retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 username:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                   format: email
+ *                 age:
+ *                   type: integer
+ *                 preferences:
+ *                   type: object
+ *                   properties:
+ *                     theme:
+ *                       type: string
+ *                       example: auto
+ *                     language:
+ *                       type: string
+ *                       example: en
+ *                     notifications:
+ *                       type: string
+ *                       example: enabled
+ *       400:
+ *         description: Invalid user ID
+ *       404:
+ *         description: User not found
  *       500:
- *         description: Error creating user
+ *         description: Error fetching profile
  */
-router.post('/', userController.createUser);
+router.get('/me', authenticateJWT, userController.getProfile);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/users/me:
  *   put:
- *     summary: Update an existing user
+ *     summary: Update the user's profile
  *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The user ID
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -74,14 +78,140 @@ router.post('/', userController.createUser);
  *               email:
  *                 type: string
  *                 format: email
+ *               preferences:
+ *                 type: object
+ *                 properties:
+ *                   theme:
+ *                     type: string
+ *                     example: auto
+ *                   language:
+ *                     type: string
+ *                     example: en
+ *                   notifications:
+ *                     type: string
+ *                     example: enabled
  *     responses:
  *       200:
  *         description: User updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     username:
+ *                       type: string
+ *                     age:
+ *                       type: integer
+ *                     email:
+ *                       type: string
+ *                       format: email
+ *                     preferences:
+ *                       type: object
+ *                       properties:
+ *                         theme:
+ *                           type: string
+ *                         language:
+ *                           type: string
+ *                         notifications:
+ *                           type: string
  *       404:
  *         description: User not found
  *       500:
  *         description: Error updating user
  */
-router.put('/:id', userController.updateUser);
+router.put('/me', authenticateJWT, userController.updateUser);
+
+/**
+ * @swagger
+ * /api/users/me/friends:
+ *   get:
+ *     summary: Get the user's friends
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of friends (only id, username, and email)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                     description: The ID of the friend
+ *                   username:
+ *                     type: string
+ *                     description: The username of the friend
+ *                   email:
+ *                     type: string
+ *                     description: The email address of the friend
+ *       500:
+ *         description: Error fetching friends
+ */
+router.get('/me/friends', authenticateJWT, userController.getFriends);
+
+
+/**
+ * @swagger
+ * /api/users/me/friends:
+ *   post:
+ *     summary: Add a new friend to the user's friend list
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               friendId:
+ *                 type: string
+ *                 description: The ID of the user to add as a friend
+ *     responses:
+ *       200:
+ *         description: Friend added successfully
+ *       400:
+ *         description: Friend already added or invalid request
+ *       404:
+ *         description: Friend not found
+ *       500:
+ *         description: Error adding friend
+ */
+router.post('/me/friends', authenticateJWT, userController.addFriend);
+
+/**
+ * @swagger
+ * /api/users/me/friends/{friendId}:
+ *   delete:
+ *     summary: Remove a friend from the user's friend list
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: friendId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the friend to remove
+ *     responses:
+ *       200:
+ *         description: Friend removed successfully
+ *       404:
+ *         description: Friend not found
+ *       500:
+ *         description: Error removing friend
+ */
+router.delete('/me/friends/:friendId', authenticateJWT, userController.removeFriend);
 
 module.exports = router;

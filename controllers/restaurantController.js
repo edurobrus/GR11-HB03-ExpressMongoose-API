@@ -1,4 +1,6 @@
+// controllers/restaurantController.js
 const Location = require('../models/location');
+const mongoose = require("mongoose");
 
 exports.getRestaurants = async (req, res) => {
   try {
@@ -40,9 +42,15 @@ exports.getNearbyRestaurants = async (req, res) => {
 };
 
 exports.getRestaurantById = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid restaurant ID' });
+  }
+
   try {
     const restaurant = await Location.findOne({ 
-      _id: req.params.id,
+      _id: id,
       type: "RESTAURANT"
     });
 
@@ -53,52 +61,5 @@ exports.getRestaurantById = async (req, res) => {
     res.status(200).json(restaurant);
   } catch (error) {
     res.status(500).json({ message: "Error fetching restaurant", error });
-  }
-};
-
-exports.createRestaurant = async (req, res) => {
-  try {
-    const newRestaurant = new Location({
-      ...req.body,
-      type: "RESTAURANT"
-    });
-    await newRestaurant.save();
-    res.status(201).json(newRestaurant);
-  } catch (error) {
-    res.status(500).json({ error: 'Error creating restaurant' });
-  }
-};
-
-exports.updateRestaurant = async (req, res) => {
-  try {
-    delete req.body.type; 
-    
-    const updatedRestaurant = await Location.findOneAndUpdate(
-      { 
-        _id: req.params.id,
-        type: "RESTAURANT" 
-      },
-      req.body,
-      { new: true }
-    );
-    
-    if (!updatedRestaurant) return res.status(404).json({ error: 'Restaurant not found' });
-    res.json(updatedRestaurant);
-  } catch (error) {
-    res.status(500).json({ error: 'Error updating restaurant' });
-  }
-};
-
-exports.deleteRestaurant = async (req, res) => {
-  try {
-    const deletedRestaurant = await Location.findOneAndDelete({ 
-      _id: req.params.id,
-      type: "RESTAURANT"
-    });
-    
-    if (!deletedRestaurant) return res.status(404).json({ error: 'Restaurant not found' });
-    res.json({ message: 'Restaurant successfully deleted' });
-  } catch (error) {
-    res.status(500).json({ error: 'Error deleting restaurant' });
   }
 };

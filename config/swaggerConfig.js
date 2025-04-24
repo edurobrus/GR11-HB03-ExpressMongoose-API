@@ -9,6 +9,15 @@ const options = {
       version: "1.0.0",
       description: "API documentation with Swagger",
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",  // Indica que es un token JWT
+        },
+      },
+    },
     servers: [
       {
         url: "http://localhost:3000",

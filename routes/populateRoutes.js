@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const populateController = require('../controllers/populateController');
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -8,12 +9,15 @@ const populateController = require('../controllers/populateController');
  *   post:
  *     summary: Imports data from ZIP files
  *     tags: [Populate]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Successful import
  *       500:
  *         description: Import error
  */
-router.post('/', populateController.populateDatabase);
+router.post('/', authenticateJWT, populateController.populateDatabase);
 
 module.exports = router;
+
