@@ -50,7 +50,7 @@ async function importJsonToMongo(jsonPath, collectionName) {
                     await collection.insertMany(buffer);
                     count += buffer.length;
                 }
-                console.log(`  ↳ Insertados ${count} documentos en '${collectionName}'`);
+                console.log(`  ↳ Inserted ${count} documents into '${collectionName}'`);
                 resolve();
             });
 
@@ -63,7 +63,7 @@ async function importJsonToMongo(jsonPath, collectionName) {
 }
 
 async function processZip(zipPath, tempDir, index, totalZips, importFunction) {
-    console.log(`\n[${index}/${totalZips}] Procesando ZIP: ${path.basename(zipPath)}`);
+    console.log(`\n[${index}/${totalZips}] Processing ZIP: ${path.basename(zipPath)}`);
     
     const zip = new AdmZip(zipPath);
     zip.extractAllTo(tempDir, true);
@@ -76,7 +76,7 @@ async function processZip(zipPath, tempDir, index, totalZips, importFunction) {
         const filename = path.basename(jsonFile, '.json');
         const collectionName = filename.replace(/^cbd\./, '');
         
-        console.log(`  → Procesando archivo: ${jsonFile} → colección '${collectionName}'`);
+        console.log(`  → Processing file: ${jsonFile} → collection '${collectionName}'`);
         await importFunction(jsonPath, collectionName);
     }
 }
@@ -91,7 +91,7 @@ async function runImport() {
         const adminDb = client.db().admin();
         const dbs = await adminDb.listDatabases();
         if (dbs.databases.some(d => d.name === DB_NAME)) {
-            console.log(`⚠️  Eliminando base de datos existente: ${DB_NAME}`);
+            console.log(`⚠️  Deleting existing database: ${DB_NAME}`);
             await db.dropDatabase();
         }
         const importJsonBound = importJsonToMongo.bind({ db });
@@ -114,9 +114,9 @@ async function runImport() {
             }
         }
         
-        console.log('\n✅ Importación completada exitosamente.');
+        console.log('\n✅ Import completed successfully.');
     } catch (error) {
-        console.error('❌ Error durante la importación:', error);
+        console.error('❌ Error during import:', error);
         process.exit(1);
     } finally {
         await client.close();

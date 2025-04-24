@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const restaurantController = require("../controllers/restaurantController");
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -65,21 +66,14 @@ const restaurantController = require("../controllers/restaurantController");
  *           type: number
  *           description: Number of votes received.
  *       example:
- *         _id: "60c72b2f9b1e8a001c8e4d2a"
+ *         _id: "661feaf8bc3e2a9c1234abcd"
  *         name: "Le Petit Souffle"
  *         location:
  *           type: "Point"
  *           coordinates: [121.027535, 14.565443]
- *         country_code: 162
- *         city: "Makati City"
- *         address: "Third Floor, Century City Mall, Kalayaan Avenue, Poblacion"
- *         cuisines: "French, Japanese, Desserts"
- *         average_cost_for_two: 1100
- *         currency: "PHP"
- *         has_table_booking: true
- *         has_online_delivery: false
- *         aggregate_rating: 4.8
- *         votes: 314
+ *         avg_rating: 4.8
+ *         type: "RESTAURANT"
+ *         total_ratings: 314
  */
 
 /**
@@ -92,8 +86,8 @@ const restaurantController = require("../controllers/restaurantController");
  *       - in: query
  *         name: limit
  *         schema:
- *           type: number
- *         description: "Maximum number of restaurants to return. Default value: 10."
+ *           type: integer
+ *         description: "Maximum number of restaurants to return."
  *     responses:
  *       200:
  *         description: List of restaurants retrieved successfully.
@@ -119,22 +113,19 @@ router.get("/", restaurantController.getRestaurants);
  *         name: lng
  *         schema:
  *           type: number
- *           default: 1.82446 # Example: Mexico City
  *         required: true
  *         description: Longitude of the user's location.
  *       - in: query
  *         name: lat
  *         schema:
  *           type: number
- *           default: 45.64261  # Example: Mexico City
  *         required: true
  *         description: Latitude of the user's location.
  *       - in: query
  *         name: maxDistance
  *         schema:
- *           type: number
- *           default: 5000
- *         description: Maximum distance in meters (default is 5000m).
+ *           type: integer
+ *         description: Maximum distance in meters.
  *     responses:
  *       200:
  *         description: List of nearby restaurants retrieved successfully.
@@ -145,11 +136,11 @@ router.get("/", restaurantController.getRestaurants);
  *               items:
  *                 $ref: '#/components/schemas/Restaurant'
  */
-router.get("/nearby", restaurantController.getNearbyRestaurants);
+router.get("/nearby", authenticateJWT, restaurantController.getNearbyRestaurants);
 
 /**
  * @swagger
- * /api/restaurants/getById/{id}:
+ * /api/restaurants/{id}:
  *   get:
  *     summary: Get a restaurant by ID
  *     tags: [Restaurants]
@@ -170,80 +161,6 @@ router.get("/nearby", restaurantController.getNearbyRestaurants);
  *       404:
  *         description: Restaurant not found.
  */
-router.get("/getById/:id", restaurantController.getRestaurantById);
-
-/**
- * @swagger
- * /api/restaurants:
- *   post:
- *     summary: Create a new restaurant
- *     tags: [Restaurants]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Restaurant'
- *     responses:
- *       201:
- *         description: Restaurant created successfully.
- *       500:
- *         description: Error creating the restaurant.
- */
-router.post("/", restaurantController.createRestaurant);
-
-/**
- * @swagger
- * /api/restaurants/update/{id}:
- *   put:
- *     summary: Update a restaurant
- *     tags: [Restaurants]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Restaurant ID.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Restaurant'
- *     responses:
- *       200:
- *         description: Restaurant updated successfully.
- *       404:
- *         description: Restaurant not found.
- */
-router.put("/update/:id", restaurantController.updateRestaurant);
-
-/**
- * @swagger
- * /api/restaurants/delete/{id}:
- *   delete:
- *     summary: Delete a restaurant
- *     tags: [Restaurants]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Restaurant ID.
- *     responses:
- *       200:
- *         description: Restaurant deleted successfully.
- *       404:
- *         description: Restaurant not found.
- */
-router.delete("delete/:id", restaurantController.deleteRestaurant);
+router.get("/:id", restaurantController.getRestaurantById);
 
 module.exports = router;

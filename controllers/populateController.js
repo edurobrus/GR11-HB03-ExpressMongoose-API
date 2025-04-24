@@ -7,6 +7,10 @@ exports.populateDatabase = async (req, res) => {
     res.status(200).json({ message: 'Import completed successfully.' });
   } catch (error) {
     console.error('Error during import:', error);
-    res.status(500).json({ error: 'Error during import.' });
+
+    return res.status(500).json({
+      error: 'Error during import.',
+      details: error.message || 'An unexpected error occurred.'
+    });
   }
 };

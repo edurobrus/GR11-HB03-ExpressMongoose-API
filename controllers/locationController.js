@@ -1,3 +1,4 @@
+// controllers/locationController.js
 const mongoose = require('mongoose');
 const Location = require('../models/location');
 
@@ -11,7 +12,6 @@ exports.getLocations = async (req, res) => {
   }
 };
 
-
 exports.getNearbyLocations = async (req, res) => {
   try {
     const { lat, lng, maxDistance } = req.query;
@@ -21,6 +21,9 @@ exports.getNearbyLocations = async (req, res) => {
     }
 
     const distance = maxDistance ? parseInt(maxDistance, 10) : 5000;
+    if (isNaN(distance) || distance <= 0) {
+      return res.status(400).json({ error: 'maxDistance must be a positive number' });
+    }
 
     const nearbyLocations = await Location.find({
       location: {
@@ -44,7 +47,7 @@ exports.getTopRatedLocations = async (req, res) => {
   try {
     const topRatedLocations = await Location.find()
       .sort({ avg_rating: -1 })
-      .limit(5); 
+      .limit(5);
 
     res.json(topRatedLocations);
   } catch (error) {
@@ -65,14 +68,20 @@ exports.getMostVotedLocations = async (req, res) => {
 };
 
 exports.getLocationById = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid location ID' });
+  }
+
   try {
-    const location = await Location.findById(req.params.id);
+    const location = await Location.findById(id);
     if (!location) {
-      return res.status(404).json({ message: "Location not found" });
+      return res.status(404).json({ message: 'Location not found' });
     }
     res.status(200).json(location);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching location", error });
+    res.status(500).json({ message: 'Error fetching location', error });
   }
 };
 
@@ -104,6 +113,6 @@ exports.updateLocationRating = async (req, res) => {
     res.status(200).json(location);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Error updating location rating' });
   }
 };

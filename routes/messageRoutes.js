@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const messageController = require('../controllers/messageController');
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -59,13 +60,9 @@ const messageController = require('../controllers/messageController');
  *           schema:
  *             type: object
  *             required:
- *               - sender_id
  *               - receiver_id
  *               - content
  *             properties:
- *               sender_id:
- *                 type: string
- *                 description: The ID of the user sending the message
  *               receiver_id:
  *                 type: string
  *                 description: The ID of the user receiving the message
@@ -73,59 +70,48 @@ const messageController = require('../controllers/messageController');
  *                 type: string
  *                 description: The text content of the message
  *     responses:
- *       201:
+ *       200:
  *         description: Message created successfully
  *       400:
  *         description: Invalid input
  */
-router.post('/', messageController.createMessage);
+router.post('/', authenticateJWT, messageController.createMessage);
 
 /**
  * @swagger
- * /api/messages/sent/{userId}:
+ * /api/messages/sent:
  *   get:
- *     summary: Get all messages sent by a specific user
+ *     summary: Get all messages sent by the user
  *     tags: [Messages]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the sender user
  *     responses:
  *       200:
  *         description: List of messages sent by the user
+ *       404:
+ *         description: No messages found
  *       500:
  *         description: Server error
  */
-router.get('/sent/:userId', messageController.getSentMessages);
+router.get('/sent', authenticateJWT, messageController.getSentMessages);
 
 /**
  * @swagger
- * /api/messages/received/{userId}:
+ * /api/messages/received:
  *   get:
- *     summary: Get all messages received by a specific user
+ *     summary: Get all messages received by the user
  *     tags: [Messages]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the receiver user
  *     responses:
  *       200:
  *         description: List of messages received by the user
+ *       404:
+ *         description: No messages found
  *       500:
  *         description: Server error
  */
-router.get('/received/:userId', messageController.getReceivedMessages);
-
+router.get('/received', authenticateJWT, messageController.getReceivedMessages);
 
 /**
  * @swagger
@@ -162,7 +148,7 @@ router.get('/received/:userId', messageController.getReceivedMessages);
  *       404:
  *         description: Message not found
  */
-router.patch('/status/:id', messageController.updateMessageStatus);
+router.patch('/status/:id', authenticateJWT, messageController.updateMessageStatus);
 
 /**
  * @swagger
@@ -187,6 +173,6 @@ router.patch('/status/:id', messageController.updateMessageStatus);
  *       500:
  *         description: Server error
  */
-router.delete('/:id', messageController.deleteMessage);
+router.delete('/:id', authenticateJWT, messageController.deleteMessage);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const populateController = require('../controllers/populateController');
+const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
@@ -16,6 +17,7 @@ const populateController = require('../controllers/populateController');
  *       500:
  *         description: Import error
  */
-router.post('/', populateController.populateDatabase);
+router.post('/', authenticateJWT, populateController.populateDatabase);
 
 module.exports = router;
+

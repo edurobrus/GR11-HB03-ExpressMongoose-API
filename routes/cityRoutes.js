@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const cityController = require("../controllers/cityController");
+const authenticateJWT = require('../middlewares/authenticateJWT');
+const { check, validationResult } = require('express-validator');  // Para validaciones
 
 /**
  * @swagger
@@ -35,10 +37,13 @@ const cityController = require("../controllers/cityController");
  *               example: [2.3522, 48.8566]
  *       example:
  *         _id: "60c72b2f9b1e8a001c8e4d2a"
- *         city_name: "Paris"
+ *         name: "Paris"
  *         location:
  *           type: "Point"
  *           coordinates: [2.3522, 48.8566]
+ *         avg_rating: 4.8
+ *         total_ratings: 214
+ *         type: "CITY"
  */
 
 /**
@@ -61,7 +66,7 @@ const cityController = require("../controllers/cityController");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Citie'
+ *                 $ref: '#/components/schemas/City'
  */
 router.get("/", cityController.getCities);
 
@@ -79,18 +84,15 @@ router.get("/", cityController.getCities);
  *         schema:
  *           type: number
  *         required: true
- *         example: 2.3522
  *       - in: query
  *         name: lat
  *         schema:
  *           type: number
  *         required: true
- *         example: 48.8566
  *       - in: query
  *         name: maxDistance
  *         schema:
  *           type: number
- *           default: 50000
  *     responses:
  *       200:
  *         description: List of nearby cities
@@ -99,13 +101,13 @@ router.get("/", cityController.getCities);
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Citie'
+ *                 $ref: '#/components/schemas/City'
  */
-router.get("/nearby", cityController.getNearbyCities);
+router.get("/nearby", authenticateJWT, cityController.getNearbyCities);
 
 /**
  * @swagger
- * /api/cities/getById/{id}:
+ * /api/cities/{id}:
  *   get:
  *     summary: Get city by ID
  *     tags: [Cities]
@@ -121,82 +123,10 @@ router.get("/nearby", cityController.getNearbyCities);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Citie'
+ *               $ref: '#/components/schemas/City'
  *       404:
  *         description: City not found
  */
-router.get("/getById/:id", cityController.getCityById);
-
-/**
- * @swagger
- * /api/cities:
- *   post:
- *     summary: Create new city
- *     tags: [Cities]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Citie'
- *     responses:
- *       201:
- *         description: City successfully created
- *       400:
- *         description: Invalid data
- */
-router.post("/", cityController.createCity);
-
-/**
- * @swagger
- * /api/cities/update/{id}:
- *   put:
- *     summary: Update city
- *     tags: [Cities]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Citie'
- *     responses:
- *       200:
- *         description: City updated
- *       404:
- *         description: City not found
- */
-router.put("/update/:id", cityController.updateCity);
-
-/**
- * @swagger
- * /api/cities/delete/{id}:
- *   delete:
- *     summary: Delete city
- *     tags: [Cities]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *     responses:
- *       200:
- *         description: City deleted
- *       404:
- *         description: City not found
- */
-router.delete("/delete/:id", cityController.deleteCity);
+router.get("/:id", cityController.getCityById);
 
 module.exports = router;

@@ -10,7 +10,10 @@ function authenticateJWT(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = decoded; 
+    if (!decoded.userId) {
+      return res.status(401).json({ message: "User not authenticated." });
+    }
+    req.userId = decoded.userId;
     next();
   } catch (err) {
     return res.status(403).json({ message: "Invalid or expired token." });
