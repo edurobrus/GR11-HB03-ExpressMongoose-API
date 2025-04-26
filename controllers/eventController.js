@@ -212,7 +212,12 @@ const eventController = {
           });
   
           await newTransaction.save();
-  
+
+          if (!event.participants.includes(userId)) {
+              event.participants.push(userId);
+              await event.save();
+          }
+    
           // 4. Responder con los datos necesarios para el frontend
           res.status(201).json({
               payment_url: session.url,
