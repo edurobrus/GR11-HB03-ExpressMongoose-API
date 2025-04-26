@@ -339,7 +339,6 @@
 </head>
 <body>
     <div id="progreso-importacion">
-        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
         <div id="eventos-container"></div>
     </div>
 
@@ -385,6 +384,7 @@
             switch(data.event) {
                 case 'import:start':
                     content = `
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
                         <div class="evento-tipo">INICIO DE IMPORTACIÓN</div>
                         <div>Total de archivos ZIP: ${data.data.totalZips}</div>
                     `;
@@ -392,6 +392,7 @@
                     
                 case 'import:zip':
                     content = `
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
                         <div class="evento-tipo">PROCESANDO ZIP</div>
                         <div>Archivo: ${data.data.file}</div>
                         <div>Progreso: ${data.data.current}/${data.data.total}</div>
@@ -400,6 +401,7 @@
                     
                 case 'import:file':
                     content = `
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
                         <div class="evento-tipo">ARCHIVO DETECTADO</div>
                         <div class="collection-name">${data.data.collection}</div>
                         <div>Archivo: ${data.data.file}</div>
@@ -408,6 +410,7 @@
                     
                 case 'import:progress':
                     content = `
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
                         <div class="evento-tipo">INSERTANDO DATOS</div>
                         <div class="collection-name">${data.data.collection}</div>
                         <div>Documentos insertados: ${data.data.count.toLocaleString()}</div>
@@ -416,6 +419,7 @@
                     
                 case 'import:done':
                     content = `
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
                         <div class="evento-tipo">IMPORTACIÓN COMPLETADA</div>
                         <div>${data.data.message}</div>
                     `;
@@ -423,8 +427,15 @@
                     
                 case 'import:error':
                     content = `
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">Progreso de Importación</h3>
                         <div class="evento-tipo">ERROR</div>
                         <div style="color: #e74c3c;">${data.data.error}</div>
+                    `;
+                    break;
+                case 'message:new':
+                    content = `
+                        <div class="evento-tipo">MENSAJE NUEVO</div>
+                        <div><strong>${data.data.sender.username}</strong>: ${data.data.content}</div>
                     `;
                     break;
             }

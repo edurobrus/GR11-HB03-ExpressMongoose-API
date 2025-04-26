@@ -1,0 +1,1100 @@
+[{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e295"
+  },
+  "name": "Concierto de Rock",
+  "description": "Aprende nuevas habilidades con expertos",
+  "date": {
+    "$date": "2025-05-25T16:36:41.671Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 52.05,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e297"
+  },
+  "name": "Taller de Cocina",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-10T16:36:41.691Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 19.26,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e299"
+  },
+  "name": "Conferencia Tech",
+  "description": "Aprende nuevas habilidades con expertos",
+  "date": {
+    "$date": "2025-05-05T16:36:41.697Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 37.18,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e29b"
+  },
+  "name": "Exposición de Arte",
+  "description": "Aprende nuevas habilidades con expertos",
+  "date": {
+    "$date": "2025-05-22T16:36:41.705Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 84.16,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e29d"
+  },
+  "name": "Maratón Urbano",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-05-22T16:36:41.709Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 57.77,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e29f"
+  },
+  "name": "Festival de Cine",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-25T16:36:41.713Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 94.29,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a1"
+  },
+  "name": "Clase de Yoga",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-01T16:36:41.719Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 10.11,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a3"
+  },
+  "name": "Seminario de Marketing",
+  "description": "Un evento increíble para disfrutar con amigos",
+  "date": {
+    "$date": "2025-05-06T16:36:41.722Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 58.64,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a5"
+  },
+  "name": "Feria de Empleo",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-07T16:36:41.725Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 61.42,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a7"
+  },
+  "name": "Torneo de Fútbol",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-20T16:36:41.728Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 16.14,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a9"
+  },
+  "name": "Show de Stand-up",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-18T16:36:41.730Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 96.41,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ab"
+  },
+  "name": "Curso de Fotografía",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-05-03T16:36:41.732Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 44.44,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ad"
+  },
+  "name": "Concierto de Rock",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-25T16:36:41.734Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 61.15,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2af"
+  },
+  "name": "Taller de Cocina 2",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-04T16:36:41.738Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 20.1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b1"
+  },
+  "name": "Conferencia Tech 2",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-16T16:36:41.740Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 46.14,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b3"
+  },
+  "name": "Exposición de Arte 2",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-10T16:36:41.742Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 16.07,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b5"
+  },
+  "name": "Maratón Urbano 2",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-04-29T16:36:41.743Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 50.55,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b7"
+  },
+  "name": "Festival de Cine 2",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-23T16:36:41.745Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 45.29,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b9"
+  },
+  "name": "Clase de Yoga 2",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-17T16:36:41.746Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 55.36,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2bb"
+  },
+  "name": "Seminario de Marketing 2",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-05-19T16:36:41.747Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 87.1,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2bd"
+  },
+  "name": "Feria de Empleo 2",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-02T16:36:41.748Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 33.17,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2bf"
+  },
+  "name": "Torneo de Fútbol 2",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-02T16:36:41.749Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 18.89,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c1"
+  },
+  "name": "Show de Stand-up 2",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-04-28T16:36:41.751Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 87.3,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c3"
+  },
+  "name": "Curso de Fotografía 2",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-04-26T16:36:41.752Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 95.96,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c5"
+  },
+  "name": "Concierto de Rock 3",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-04-30T16:36:41.754Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 68.63,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c7"
+  },
+  "name": "Taller de Cocina 3",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-05-13T16:36:41.755Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 45.61,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c9"
+  },
+  "name": "Conferencia Tech 3",
+  "description": "Un evento increíble para disfrutar con amigos",
+  "date": {
+    "$date": "2025-05-15T16:36:41.756Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 29.56,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2cb"
+  },
+  "name": "Exposición de Arte 3",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-23T16:36:41.757Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 37.48,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2cd"
+  },
+  "name": "Maratón Urbano 3",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-05-12T16:36:41.758Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 60.79,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2cf"
+  },
+  "name": "Festival de Cine 3",
+  "description": "Un evento increíble para disfrutar con amigos",
+  "date": {
+    "$date": "2025-05-04T16:36:41.759Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 29.34,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d1"
+  },
+  "name": "Clase de Yoga 3",
+  "description": "Aprende nuevas habilidades con expertos",
+  "date": {
+    "$date": "2025-05-16T16:36:41.761Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 89.97,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d3"
+  },
+  "name": "Seminario de Marketing 3",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-06T16:36:41.763Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 20.13,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d5"
+  },
+  "name": "Feria de Empleo 3",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-05-18T16:36:41.764Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 64.12,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d7"
+  },
+  "name": "Torneo de Fútbol 3",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-05-22T16:36:41.765Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 40.83,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d9"
+  },
+  "name": "Show de Stand-up 3",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-15T16:36:41.767Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 27.49,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2db"
+  },
+  "name": "Curso de Fotografía 3",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-22T16:36:41.768Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 92.82,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2dd"
+  },
+  "name": "Concierto de Rock 4",
+  "description": "Experiencia cultural única",
+  "date": {
+    "$date": "2025-04-28T16:36:41.769Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 27.89,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2df"
+  },
+  "name": "Taller de Cocina 4",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-04T16:36:41.770Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 53.47,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e1"
+  },
+  "name": "Conferencia Tech 4",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-23T16:36:41.771Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 93.28,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e3"
+  },
+  "name": "Exposición de Arte 4",
+  "description": "Networking y aprendizaje combinados",
+  "date": {
+    "$date": "2025-05-08T16:36:41.772Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 29.9,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e5"
+  },
+  "name": "Maratón Urbano 4",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-14T16:36:41.773Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 55.62,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e7"
+  },
+  "name": "Festival de Cine 4",
+  "description": "Aprende nuevas habilidades con expertos",
+  "date": {
+    "$date": "2025-05-01T16:36:41.774Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 48.22,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e9"
+  },
+  "name": "Clase de Yoga 4",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-10T16:36:41.776Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 92.84,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2eb"
+  },
+  "name": "Seminario de Marketing 4",
+  "description": "Evento deportivo para todos los niveles",
+  "date": {
+    "$date": "2025-05-15T16:36:41.777Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 70.43,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ed"
+  },
+  "name": "Feria de Empleo 4",
+  "description": "Un evento increíble para disfrutar con amigos",
+  "date": {
+    "$date": "2025-05-19T16:36:41.779Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 54.5,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ef"
+  },
+  "name": "Torneo de Fútbol 4",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-19T16:36:41.780Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ec"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 77.29,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f1"
+  },
+  "name": "Show de Stand-up 4",
+  "description": "Un evento increíble para disfrutar con amigos",
+  "date": {
+    "$date": "2025-05-14T16:36:41.781Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 32.05,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f3"
+  },
+  "name": "Curso de Fotografía 4",
+  "description": "Aprende nuevas habilidades con expertos",
+  "date": {
+    "$date": "2025-05-05T16:36:41.782Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "participants": [],
+  "status": "active",
+  "price": 10.16,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f5"
+  },
+  "name": "Concierto de Rock 5",
+  "description": "Aprende nuevas habilidades con expertos",
+  "date": {
+    "$date": "2025-05-21T16:36:41.783Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ee"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "participants": [],
+  "status": "completed",
+  "price": 86.08,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f7"
+  },
+  "name": "Taller de Cocina 5",
+  "description": "Conoce las últimas tendencias del sector",
+  "date": {
+    "$date": "2025-05-19T16:36:41.783Z"
+  },
+  "locations": [
+    {
+      "$oid": "67c25101b3f3867b9b0908ed"
+    }
+  ],
+  "organizer_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "participants": [],
+  "status": "canceled",
+  "price": 23.04,
+  "__v": 0
+}]

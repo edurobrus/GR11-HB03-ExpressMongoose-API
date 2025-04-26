@@ -47,7 +47,9 @@ const routes = {
   restaurants: require("./routes/restaurantRoutes"),
   locations: require("./routes/locationRoutes"),
   users: require("./routes/userRoutes"),
-  messages: require("./routes/messageRoutes")
+  messages: require("./routes/messageRoutes"),
+  events: require("./routes/eventRoutes"),
+  auth: require("./routes/authRoutes")
 
 };
 
@@ -59,6 +61,8 @@ app.use("/api/restaurants", routes.restaurants);
 app.use("/api/locations", routes.locations);
 app.use("/api/users", routes.users);
 app.use("/api/messages", routes.messages);
+app.use("/api/events", routes.events);
+app.use("/api/auth", routes.auth);
 
 // WebSocket: Maneja las conexiones y almacena clientes
 const wsClients = [];

@@ -53,22 +53,19 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  *     tags: [Messages]
  *     security:
  *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - receiver_id
- *               - content
- *             properties:
- *               receiver_id:
- *                 type: string
- *                 description: The ID of the user receiving the message
- *               content:
- *                 type: string
- *                 description: The text content of the message
+ *     parameters:
+ *       - in: query
+ *         name: receiver_id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the user receiving the message
+ *       - in: query
+ *         name: content
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The text content of the message
  *     responses:
  *       200:
  *         description: Message created successfully

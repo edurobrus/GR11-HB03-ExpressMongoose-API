@@ -14,43 +14,53 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  * @swagger
  * /api/users/me:
  *   get:
- *     summary: Get the user's profile
+ *     summary: Obtiene el perfil del usuario autenticado
+ *     description: >
+ *       El ID del usuario se obtiene automáticamente del token JWT proporcionado.
+ *       No se necesita enviar explícitamente como parámetro.
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: User profile retrieved successfully
+ *         description: Perfil de usuario obtenido exitosamente
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
+ *                 _id:
+ *                   type: string
+ *                   format: objectid
+ *                   example: "664d20a254cc8d3b40e720c0"
  *                 username:
  *                   type: string
+ *                   example: "johndoe"
  *                 email:
  *                   type: string
  *                   format: email
+ *                   example: "john.doe@example.com"
  *                 age:
  *                   type: integer
+ *                   example: 25
  *                 preferences:
  *                   type: object
  *                   properties:
  *                     theme:
  *                       type: string
- *                       example: auto
+ *                       example: "auto"
  *                     language:
  *                       type: string
- *                       example: en
+ *                       example: "en"
  *                     notifications:
  *                       type: string
- *                       example: enabled
- *       400:
- *         description: Invalid user ID
+ *                       example: "enabled"
+ *       401:
+ *         description: Token no válido o no proporcionado
  *       404:
- *         description: User not found
+ *         description: Usuario no encontrado
  *       500:
- *         description: Error fetching profile
+ *         description: Error del servidor
  */
 router.get('/me', authenticateJWT, userController.getProfile);
 
