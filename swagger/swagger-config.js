@@ -21,10 +21,7 @@ module.exports = {
             description: "Introduce el token JWT obtenido durante el login"
           }
         }
-      },
-      security: [{
-        bearerAuth: []
-      }]
+      }
     },
     apis: ["./routes/*.js"]
   }
