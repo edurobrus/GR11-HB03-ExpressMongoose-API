@@ -6,25 +6,29 @@ exports.getProfile = async (req, res) => {
   const userId = req.userId;
 
   if (!mongoose.Types.ObjectId.isValid(userId)) {
-    return res.status(400).json({ message: 'Invalid user ID' });
+    return res.status(400).json({ message: 'ID de usuario no válido' });
   }
 
   try {
-    const user = await User.findById(userId).select('username email age preferences');
+    const user = await User.findById(userId).select('_id username email age preferences');
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
     res.json({
+      _id: user._id,
       username: user.username,
       email: user.email,
       age: user.age,
       preferences: user.preferences
     });
   } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ message: 'Error fetching profile', error: error.message });
+    console.error('Error obteniendo perfil:', error);
+    res.status(500).json({ 
+      message: 'Error obteniendo perfil',
+      error: error.message 
+    });
   }
 };
 

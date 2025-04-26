@@ -2,9 +2,19 @@
 const mongoose = require('mongoose');
 const Message = require('../models/Message');
 const User = require('../models/User');
+const WebSocket = require('ws');
+
+function sendWsMessage(clients, event, data) {
+  const message = JSON.stringify({ event, data });
+  clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(message);
+    }
+  });
+}
 
 exports.createMessage = async (req, res) => {
-    const { receiver_id, content } = req.body;
+    const { receiver_id, content } = req.query;
     const userId = req.userId;
 
     if (!receiver_id || !content) {
@@ -20,7 +30,10 @@ exports.createMessage = async (req, res) => {
     }
 
     try {
-        const receiver = await User.findById(receiver_id);
+        const [receiver, sender] = await Promise.all([
+            User.findById(receiver_id),
+            User.findById(userId, 'username avatar') // Solo username y avatar del sender
+        ]);
         if (!receiver) {
             return res.status(404).json({ error: 'Receiver user not found' });
         }
@@ -31,6 +44,12 @@ exports.createMessage = async (req, res) => {
             content,
             date: new Date(),
             status: 'sent'
+        });
+
+        
+        sendWsMessage(req.app.locals.wsClients, 'message:new', {
+            ...message.toObject(),
+            sender: sender.toObject()
         });
 
         await message.save();

@@ -10,7 +10,7 @@ const generateToken = (userId) => {
 };
 
 exports.register = async (req, res) => {
-    const { username, password, age, email } = req.body;
+    const { username, password, age, email } = req.query;
 
     if (!username || !password || !email || !age) {
         return res.status(400).json({ message: 'All fields are required' });
@@ -53,7 +53,7 @@ exports.register = async (req, res) => {
 
 
 exports.login = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password } = req.query;
 
     try {
         const user = await User.findOne({ username });

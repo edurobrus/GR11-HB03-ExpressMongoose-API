@@ -1,0 +1,900 @@
+[{
+  "_id": {
+    "$oid": "680d0b9a99ea03cc0e75e2f9"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e295"
+  },
+  "amount": 52.05,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBiYIhLJja1joh03p8Hyj4",
+  "date": {
+    "$date": "2025-04-26T16:36:42.399Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9a99ea03cc0e75e2fb"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e297"
+  },
+  "amount": 19.26,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBiYIhLJja1joh0Zib6oT1",
+  "date": {
+    "$date": "2025-04-26T16:36:42.783Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9b99ea03cc0e75e2fd"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e299"
+  },
+  "amount": 37.18,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBiYIhLJja1joh2HC3UWPk",
+  "date": {
+    "$date": "2025-04-26T16:36:43.140Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9b99ea03cc0e75e2ff"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e29b"
+  },
+  "amount": 84.16,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBiZIhLJja1joh2K5O5iQt",
+  "date": {
+    "$date": "2025-04-26T16:36:43.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9b99ea03cc0e75e301"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e29d"
+  },
+  "amount": 57.77,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBiZIhLJja1joh0zjWX67E",
+  "date": {
+    "$date": "2025-04-26T16:36:43.860Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9c99ea03cc0e75e303"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e29f"
+  },
+  "amount": 94.29,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBiZIhLJja1joh1cKrls1d",
+  "date": {
+    "$date": "2025-04-26T16:36:44.222Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9c99ea03cc0e75e305"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a1"
+  },
+  "amount": 10.11,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBiaIhLJja1joh2U0fKdhl",
+  "date": {
+    "$date": "2025-04-26T16:36:44.635Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9d99ea03cc0e75e307"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a3"
+  },
+  "amount": 58.64,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBiaIhLJja1joh2i1ysKdY",
+  "date": {
+    "$date": "2025-04-26T16:36:45.009Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9d99ea03cc0e75e309"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a5"
+  },
+  "amount": 61.42,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBibIhLJja1joh2uSnuyZQ",
+  "date": {
+    "$date": "2025-04-26T16:36:45.359Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9d99ea03cc0e75e30b"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a7"
+  },
+  "amount": 16.14,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBibIhLJja1joh1wU87kcR",
+  "date": {
+    "$date": "2025-04-26T16:36:45.720Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9e99ea03cc0e75e30d"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2a9"
+  },
+  "amount": 96.41,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBibIhLJja1joh1OOawkTS",
+  "date": {
+    "$date": "2025-04-26T16:36:46.072Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9e99ea03cc0e75e30f"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ab"
+  },
+  "amount": 44.44,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBicIhLJja1joh2u2eaTB2",
+  "date": {
+    "$date": "2025-04-26T16:36:46.461Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9e99ea03cc0e75e311"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ad"
+  },
+  "amount": 61.15,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBicIhLJja1joh23qSDKZs",
+  "date": {
+    "$date": "2025-04-26T16:36:46.826Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9f99ea03cc0e75e313"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2af"
+  },
+  "amount": 20.1,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBicIhLJja1joh0oFxSOSW",
+  "date": {
+    "$date": "2025-04-26T16:36:47.189Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9f99ea03cc0e75e315"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b1"
+  },
+  "amount": 46.14,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBidIhLJja1joh0Nqtsw9u",
+  "date": {
+    "$date": "2025-04-26T16:36:47.551Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0b9f99ea03cc0e75e317"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b3"
+  },
+  "amount": 16.07,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBidIhLJja1joh09ddED9e",
+  "date": {
+    "$date": "2025-04-26T16:36:47.894Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba099ea03cc0e75e319"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b5"
+  },
+  "amount": 50.55,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBieIhLJja1joh1SadBhwn",
+  "date": {
+    "$date": "2025-04-26T16:36:48.271Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba099ea03cc0e75e31b"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b7"
+  },
+  "amount": 45.29,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBieIhLJja1joh2dZUAQYP",
+  "date": {
+    "$date": "2025-04-26T16:36:48.647Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba099ea03cc0e75e31d"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2b9"
+  },
+  "amount": 55.36,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBieIhLJja1joh0FU1FLiL",
+  "date": {
+    "$date": "2025-04-26T16:36:48.993Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba199ea03cc0e75e31f"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2bb"
+  },
+  "amount": 87.1,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBifIhLJja1joh1QVWReAg",
+  "date": {
+    "$date": "2025-04-26T16:36:49.348Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba199ea03cc0e75e321"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2bd"
+  },
+  "amount": 33.17,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBifIhLJja1joh0jniXwVS",
+  "date": {
+    "$date": "2025-04-26T16:36:49.759Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba299ea03cc0e75e323"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2bf"
+  },
+  "amount": 18.89,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBifIhLJja1joh1DaMcq4c",
+  "date": {
+    "$date": "2025-04-26T16:36:50.102Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba299ea03cc0e75e325"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c1"
+  },
+  "amount": 87.3,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBigIhLJja1joh1XGdp1gh",
+  "date": {
+    "$date": "2025-04-26T16:36:50.473Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba299ea03cc0e75e327"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c3"
+  },
+  "amount": 95.96,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBigIhLJja1joh2kS8Zvry",
+  "date": {
+    "$date": "2025-04-26T16:36:50.827Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba399ea03cc0e75e329"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c5"
+  },
+  "amount": 68.63,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBigIhLJja1joh2l2OBLnh",
+  "date": {
+    "$date": "2025-04-26T16:36:51.223Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba399ea03cc0e75e32b"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c7"
+  },
+  "amount": 45.61,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBihIhLJja1joh0d0EdAdT",
+  "date": {
+    "$date": "2025-04-26T16:36:51.595Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba399ea03cc0e75e32d"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2c9"
+  },
+  "amount": 29.56,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBihIhLJja1joh0WD1M62C",
+  "date": {
+    "$date": "2025-04-26T16:36:51.982Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba499ea03cc0e75e32f"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2cb"
+  },
+  "amount": 37.48,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBiiIhLJja1joh1gfvq39T",
+  "date": {
+    "$date": "2025-04-26T16:36:52.321Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba499ea03cc0e75e331"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2cd"
+  },
+  "amount": 60.79,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBiiIhLJja1joh29ve8RJi",
+  "date": {
+    "$date": "2025-04-26T16:36:52.671Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba599ea03cc0e75e333"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2cf"
+  },
+  "amount": 29.34,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBiiIhLJja1joh1efsmAxz",
+  "date": {
+    "$date": "2025-04-26T16:36:53.019Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba599ea03cc0e75e335"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d1"
+  },
+  "amount": 89.97,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBijIhLJja1joh2Q3e7ONs",
+  "date": {
+    "$date": "2025-04-26T16:36:53.401Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba599ea03cc0e75e337"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d3"
+  },
+  "amount": 20.13,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBijIhLJja1joh0piAbDYC",
+  "date": {
+    "$date": "2025-04-26T16:36:53.768Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba699ea03cc0e75e339"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d5"
+  },
+  "amount": 64.12,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBijIhLJja1joh1FYaRL8b",
+  "date": {
+    "$date": "2025-04-26T16:36:54.138Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba699ea03cc0e75e33b"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d7"
+  },
+  "amount": 40.83,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBikIhLJja1joh2z4wyiBh",
+  "date": {
+    "$date": "2025-04-26T16:36:54.522Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba699ea03cc0e75e33d"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2d9"
+  },
+  "amount": 27.49,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBikIhLJja1joh02tVRqbs",
+  "date": {
+    "$date": "2025-04-26T16:36:54.920Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba799ea03cc0e75e33f"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2db"
+  },
+  "amount": 92.82,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBilIhLJja1joh0EfPhylD",
+  "date": {
+    "$date": "2025-04-26T16:36:55.296Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba799ea03cc0e75e341"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440c"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2dd"
+  },
+  "amount": 27.89,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBilIhLJja1joh2wKKIxyH",
+  "date": {
+    "$date": "2025-04-26T16:36:55.654Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba799ea03cc0e75e343"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2df"
+  },
+  "amount": 53.47,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBilIhLJja1joh1KAClaHp",
+  "date": {
+    "$date": "2025-04-26T16:36:55.999Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba899ea03cc0e75e345"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e1"
+  },
+  "amount": 93.28,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBimIhLJja1joh2WpF0EDg",
+  "date": {
+    "$date": "2025-04-26T16:36:56.359Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba899ea03cc0e75e347"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e3"
+  },
+  "amount": 29.9,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBimIhLJja1joh0CAEmONx",
+  "date": {
+    "$date": "2025-04-26T16:36:56.713Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba999ea03cc0e75e349"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e5"
+  },
+  "amount": 55.62,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBimIhLJja1joh0izzy5bf",
+  "date": {
+    "$date": "2025-04-26T16:36:57.096Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba999ea03cc0e75e34b"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e7"
+  },
+  "amount": 48.22,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBinIhLJja1joh2KTSfLFx",
+  "date": {
+    "$date": "2025-04-26T16:36:57.446Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0ba999ea03cc0e75e34d"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb74410"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2e9"
+  },
+  "amount": 92.84,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBinIhLJja1joh2cPfXXZ0",
+  "date": {
+    "$date": "2025-04-26T16:36:57.830Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0baa99ea03cc0e75e34f"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2eb"
+  },
+  "amount": 70.43,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBinIhLJja1joh0bXLWHUz",
+  "date": {
+    "$date": "2025-04-26T16:36:58.202Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0baa99ea03cc0e75e351"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ed"
+  },
+  "amount": 54.5,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBioIhLJja1joh2qc7Hi6l",
+  "date": {
+    "$date": "2025-04-26T16:36:58.550Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0baa99ea03cc0e75e353"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2ef"
+  },
+  "amount": 77.29,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBioIhLJja1joh0iBemEBf",
+  "date": {
+    "$date": "2025-04-26T16:36:58.916Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0bab99ea03cc0e75e355"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f1"
+  },
+  "amount": 32.05,
+  "status": "refunded",
+  "stripe_payment_intent_id": "pi_3RIBipIhLJja1joh1DzbJzhp",
+  "date": {
+    "$date": "2025-04-26T16:36:59.262Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0bab99ea03cc0e75e357"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440d"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f3"
+  },
+  "amount": 10.16,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBipIhLJja1joh1AsEVBud",
+  "date": {
+    "$date": "2025-04-26T16:36:59.619Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0bab99ea03cc0e75e359"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440f"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f5"
+  },
+  "amount": 86.08,
+  "status": "completed",
+  "stripe_payment_intent_id": "pi_3RIBipIhLJja1joh1aRMeH2Q",
+  "date": {
+    "$date": "2025-04-26T16:36:59.981Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "680d0bac99ea03cc0e75e35b"
+  },
+  "user_id": {
+    "$oid": "67c22129f838c1139bb7440e"
+  },
+  "event_id": {
+    "$oid": "680d0b9999ea03cc0e75e2f7"
+  },
+  "amount": 23.04,
+  "status": "pending",
+  "stripe_payment_intent_id": "pi_3RIBiqIhLJja1joh1zOYg2wN",
+  "date": {
+    "$date": "2025-04-26T16:37:00.353Z"
+  },
+  "__v": 0
+}]

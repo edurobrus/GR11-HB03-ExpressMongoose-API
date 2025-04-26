@@ -42,96 +42,90 @@ const router = express.Router();
  *         age: 25
  *         email: "john.doe@example.com"
  */
-
 /**
  * @swagger
  * /api/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - username
- *               - password
- *               - email
- *               - age
- *             properties:
- *               username:
- *                 type: string
- *                 example: johndoe
- *               password:
- *                 type: string
- *                 example: mypassword
- *               age:
- *                 type: integer
- *                 example: 25
- *               email:
- *                 type: string
- *                 format: email
- *                 example: john.doe@example.com
+ *     parameters:
+ *       - in: query
+ *         name: username
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: "johndoe"
+ *       - in: query
+ *         name: password
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: "Secret123!"
+ *       - in: query
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: email
+ *         example: "john.doe@example.com"
+ *       - in: query
+ *         name: age
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 25
  *     responses:
  *       200:
  *         description: User registered successfully
  *         content:
  *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *                 preferences:
- *                   type: object
- *                   description: Default preferences applied to the user
- *                   example:
- *                     theme: auto
- *                     language: en
- *                     notifications: enabled
+ *             example:
+ *               token: "7adfbf456109bb263f7156fcf682a55859a7de88539fd9d128e7972269374b15"
  *       400:
- *         description: User already exists or validation error
+ *         description: Validation error or user exists
+ *         examples:
+ *           application/json:
+ *             message: "User already exists"
  *       500:
  *         description: Server error
  */
+
+
+
 router.post('/register', register);
+// routes/authRoutes.js (Swagger actualizado)
 
 /**
  * @swagger
  * /api/auth/login:
  *   post:
- *     summary: Authenticate user and return token
+ *     summary: Authenticate user
  *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - username
- *               - password
- *             properties:
- *               username:
- *                 type: string
- *                 example: johndoe
- *               password:
- *                 type: string
- *                 example: mypassword
+ *     parameters:
+ *       - in: query
+ *         name: username
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: "johndoe"
+ *       - in: query
+ *         name: password
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: "Secret123!"
  *     responses:
  *       200:
  *         description: Login successful
  *         content:
  *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
+ *             example:
+ *               token: "7adfbf456109bb263f7156fcf682a55859a7de88539fd9d128e7972269374b15"
  *       400:
  *         description: Invalid credentials
+ *         examples:
+ *           application/json:
+ *             message: "Invalid username or password"
  *       500:
  *         description: Server error
  */
