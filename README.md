@@ -46,8 +46,13 @@ Crea un archivo `.env` en la raíz del proyecto y añade:
 
 ```env
 PORT=3000
+API_URL=http://localhost:3000
 MONGO_URI=mongodb://localhost:27017/cbd
+DB_NAME=cbd
+BATCH_SIZE=1000
+MAX_PARALLEL_ZIPS=5
 JWT_SECRET=7adfbf456109bb263f7156fcf682a55859a7de88539fd9d128e7972269374b15
+STRIPE_SECRET_KEY=sk_test_51RHtE8IhLJja1joh9Hd7ExKuZrP9fKilEBpKIEnlxP16DG3460mLPk76tBZtRF5uwQIB7FGBWtdu8255WcTh8EMp00zP7m0Nst
 ```
 
 ### 4. Ejecutar el servidor de Node.js
