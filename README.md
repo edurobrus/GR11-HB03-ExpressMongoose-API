@@ -15,6 +15,7 @@ La API permite gestionar usuarios, mensajes privados, amistades, eventos y local
 - **JWT** – Autenticación basada en tokens.
 - **Swagger UI + swagger-jsdoc** – Documentación interactiva de la API.
 - **Websockets** – Permite una comunicación bidireccional y en tiempo real entre el cliente y el servidor a través de una única conexión persistente.
+- **Stripe** - Permite crear transacciones dentro del sistema, es necesario para crear eventos de pago en la API.
 
 ## 🔧 Requisitos previos
 
@@ -165,3 +166,10 @@ Aquí tienes una vista rápida. Para detalles y pruebas, usa Swagger.
 3. Haz tus cambios y haz commit: `git commit -m 'Mejora: ...'`
 4. Sube la rama: `git push origin feature/mi-mejora`
 5. Abre un Pull Request.
+
+## 📝 Datasets usados en el Proyecto
+
+1. Usuarios: [Usuarios](https://www.kaggle.com/datasets/programmerrdai/brute-force-database?select=38650-password-sktorrent.txt)
+2. Restaurantes: [Restaurantes](https://www.kaggle.com/datasets/stefanoleone992/tripadvisor-european-restaurants)
+3. Ciudades: [Ciudades](https://www.kaggle.com/datasets/max-mind/world-cities-database?select=worldcitiespop.csv)
+4. Mensajes: [Mensajes](https://www.kaggle.com/datasets/uciml/sms-spam-collection-dataset)
