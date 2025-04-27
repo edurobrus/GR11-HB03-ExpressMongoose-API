@@ -87,7 +87,7 @@ exports.getLocationById = async (req, res) => {
 
 exports.updateLocationRating = async (req, res) => {
   const { id } = req.params;
-  const { avg_user } = req.body;
+  const { avg_user } = req.query;
 
   const parsedRating = parseFloat(avg_user);
 

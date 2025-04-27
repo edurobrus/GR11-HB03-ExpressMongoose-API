@@ -198,7 +198,6 @@ router.get('/most-voted', locationController.getMostVotedLocations);
  *         description: Server error
  */
 router.get('/:id', locationController.getLocationById);
-
 /**
  * @swagger
  * /api/locations/{id}/rating:
@@ -214,20 +213,15 @@ router.get('/:id', locationController.getLocationById);
  *         description: Location ID
  *         schema:
  *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - avg_user
- *             properties:
- *               avg_user:
- *                 type: number
- *                 minimum: 0
- *                 maximum: 5
- *                 example: 4.5
+ *       - in: query
+ *         name: avg_user
+ *         required: true
+ *         description: Average user rating (0 to 5)
+ *         schema:
+ *           type: number
+ *           minimum: 0
+ *           maximum: 5
+ *           example: 4.5
  *     responses:
  *       200:
  *         description: Location updated
