@@ -158,15 +158,38 @@
     .import-error { border-color: var(--color-danger); }
 
     /* Override de estilos Swagger UI */
+
+    .swagger-ui .information-container,
+    .swagger-ui .scheme-container,
+    .swagger-ui .opblock-tag-section {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .swagger-ui .opblock {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .swagger-ui .topbar-wrapper {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
     .swagger-ui .topbar {
-        display: none;
+        max-width: 1000px;
+        width: 100%;
+        margin: 0 auto;
     }
 
     .swagger-ui .information-container {
         background: #f8f9fa;
         padding: 2rem;
         border-radius: var(--border-radius);
-        margin: 20px;
         box-shadow: var(--box-shadow);
     }
 
@@ -201,6 +224,17 @@
         padding: 1rem;
     }
 
+    .swagger-ui .scheme-container {
+        padding: 16px 24px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .swagger-ui .scheme-container {
+        margin-bottom: 20px;
+    }
+
     .swagger-ui .btn.authorize {
         background: var(--color-secondary);
         border-color: var(--color-secondary);
@@ -209,6 +243,16 @@
 
     .swagger-ui .btn.authorize svg {
         fill: white;
+    }
+
+    #swagger-ui {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    }
+
+    .swagger-ui .information-container {
+        margin-bottom: 20px;
     }
 
     /* Estado de error */
@@ -351,7 +395,7 @@
     <div id="swagger-ui"></div>
 
     <div class="custom-footer">
-        <p>© 2023 HB03. Todos los derechos reservados.</p>
+        <p>© 2025 HB03. Todos los derechos reservados.</p>
     </div>
 
     <script src="/swagger-ui/swagger-ui-bundle.js"></script>

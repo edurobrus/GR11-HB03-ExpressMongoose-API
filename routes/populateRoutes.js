@@ -4,24 +4,30 @@ const populateController = require('../controllers/populateController');
 
 /**
  * @swagger
+ * tags:
+ *   name: Data Import
+ *   description: Endpoints for import data management
+ */
+
+/**
+ * @swagger
  * /api/populate:
  *   post:
- *     tags:
- *       - Data Import
- *     summary: Inicia la importación de datos desde archivos
+ *     tags: [Data Import]
+ *     summary: Start the data import from files.
  *     description: |
- *       Inicia el proceso de importación de datos a MongoDB desde archivos.
+ *       Start the data import process to MongoDB from files.
  *       
- *       **Flujo de comunicación:**
- *       1. Ejecuta este endpoint para iniciar la importación
- *       2. Conéctate al WebSocket proporcionado para recibir actualizaciones
- *       3. Escucha los eventos de progreso en tiempo real
+ *       **Communication flow:**
+ *       1. Execute this endpoint to start the import
+ *       2. Connect to the provided WebSocket to receive updates
+ *       3. Listen for real-time progress events
  *       
  *     produces:
  *       - application/json
  *     responses:
  *       202:
- *         description: Importación iniciada correctamente
+ *         description: Import started successfully
  *         content:
  *           application/json:
  *             schema:
@@ -29,14 +35,14 @@ const populateController = require('../controllers/populateController');
  *               properties:
  *                 message:
  *                   type: string
- *                   example: Importación iniciada
+ *                   example: Import started
  *                 websocket:
  *                   type: object
  *                   properties:
  *                     url:
  *                       type: string
  *                       example: "ws://localhost:3000"
- *                     eventos:
+ *                     events:
  *                       type: array
  *                       items:
  *                         type: string
@@ -48,7 +54,7 @@ const populateController = require('../controllers/populateController');
  *                         - "import:done"
  *                         - "import:error"
  *       500:
- *         description: Error al iniciar la importación
+ *         description: Error starting the import
  *         content:
  *           application/json:
  *             schema:
@@ -56,10 +62,10 @@ const populateController = require('../controllers/populateController');
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Error detallado..."
+ *                   example: "Detailed error..."
  *     externalDocs:
- *       description: Documentación completa de eventos WebSocket
- */
+ *       description: Full WebSocket events documentation
+*/
 router.post('/', async (req, res) => {
     try {
         await populateController.triggerImport(req.app.locals.wsClients);

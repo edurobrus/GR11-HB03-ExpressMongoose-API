@@ -7,7 +7,7 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  * @swagger
  * tags:
  *   name: Restaurants
- *   description: Endpoints for restaurant management, including CRUD operations and proximity search.
+ *   description: Endpoints for restaurant management
  */
 
 /**

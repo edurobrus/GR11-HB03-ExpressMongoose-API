@@ -7,23 +7,23 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  * @swagger
  * tags:
  *   name: Users
- *   description: User management endpoints
+ *   description: Endpoints for user management
  */
 
 /**
  * @swagger
  * /api/users/me:
  *   get:
- *     summary: Obtiene el perfil del usuario autenticado
+ *     summary: Get the user's profile
  *     description: >
- *       El ID del usuario se obtiene automáticamente del token JWT proporcionado.
- *       No se necesita enviar explícitamente como parámetro.
+ *       The user ID is automatically obtained from the provided JWT token.
+ *       There's no need to send it explicitly as a parameter.
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Perfil de usuario obtenido exitosamente
+ *         description: User profile successfully obtained
  *         content:
  *           application/json:
  *             schema:
@@ -56,11 +56,11 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  *                       type: string
  *                       example: "enabled"
  *       401:
- *         description: Token no válido o no proporcionado
+ *         description: Invalid or missing token
  *       404:
- *         description: Usuario no encontrado
+ *         description: User not found
  *       500:
- *         description: Error del servidor
+ *         description: Server error
  */
 router.get('/me', authenticateJWT, userController.getProfile);
 
@@ -138,10 +138,18 @@ router.put('/me', authenticateJWT, userController.updateUser);
 
 /**
  * @swagger
+ * tags:
+ *   name: Friends
+ *   description: Endpoints for friend management
+ */
+
+
+/**
+ * @swagger
  * /api/users/me/friends:
  *   get:
  *     summary: Get the user's friends
- *     tags: [Users]
+ *     tags: [Friends]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -174,7 +182,7 @@ router.get('/me/friends', authenticateJWT, userController.getFriends);
  * /api/users/me/friends:
  *   post:
  *     summary: Add a new friend to the user's friend list
- *     tags: [Users]
+ *     tags: [Friends]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -204,7 +212,7 @@ router.post('/me/friends', authenticateJWT, userController.addFriend);
  * /api/users/me/friends/{friendId}:
  *   delete:
  *     summary: Remove a friend from the user's friend list
- *     tags: [Users]
+ *     tags: [Friends]
  *     security:
  *       - bearerAuth: []
  *     parameters:

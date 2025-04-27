@@ -7,7 +7,7 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  * @swagger
  * tags:
  *   name: Locations
- *   description: API for managing locations
+ *   description: Endpoints for location management
  */
 
 /**

@@ -7,14 +7,14 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  * @swagger
  * tags:
  *   name: Events
- *   description: Gestión de eventos mediante parámetros URL
+ *   description: Endpoints for event management
  */
 
 /**
  * @swagger
- * /api/events/create:
- *   get:
- *     summary: Crear nuevo evento por query params
+ * /api/events/:
+ *   post:
+ *     summary: Create a new event using query params
  *     tags: [Events]
  *     security:
  *       - bearerAuth: []
@@ -23,11 +23,11 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  *         name: name
  *         required: true
  *         schema: { type: string }
- *         example: "Concierto de Rock"
+ *         example: "Rock Concert"
  *       - in: query
  *         name: description
  *         schema: { type: string }
- *         example: "Evento musical en vivo"
+ *         example: "Live music event"
  *       - in: query
  *         name: date
  *         schema: { type: string, format: date }
@@ -35,7 +35,7 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  *       - in: query
  *         name: locations
  *         schema: { type: string }
- *         description: IDs separados por comas
+ *         description: Comma-separated IDs
  *         example: "67c25101b3f3867b9b0908ec"
  *       - in: query
  *         name: price
@@ -44,10 +44,10 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  *       - in: query
  *         name: category
  *         schema: { type: string }
- *         example: "Música"
+ *         example: "Music"
  *     responses:
  *       201:
- *         description: Evento creado
+ *         description: Event created
  *         content:
  *           application/json:
  *             schema:
@@ -81,41 +81,63 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  *                   type: number
  *             example:
  *               _id: "680c07167e835634218013f8"
- *               name: "Concierto de Rock"
- *               description: "Evento musical en vivo"
+ *               name: "Rock Concert"
+ *               description: "Live music event"
  *               date: "2024-12-31T20:00:00.000Z"
  *               locations: ["67c25101b3f3867b9b0908ec"]
  *               organizer_id: "680c000cf534f14f7dd72d93"
  *               participants: []
  *               status: "active"
- *               category: "Música"
+ *               category: "Music"
  *               price: 50
  */
-router.get("/create", authenticateJWT, eventController.createEvent);
+router.post("/", authenticateJWT, eventController.createEvent);
 
 /**
  * @swagger
- * /api/events/delete/{id}:
+ * /api/events/{id}:
  *   get:
- *     summary: Eliminar evento por ID
+ *     summary: Get an event by ID
  *     tags: [Events]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the event to retrieve
  *     responses:
  *       200:
- *         description: Evento eliminado
+ *         description: Complete event details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Event'
+ *             example:
+ *               _id: "680c07167e835634218013f8"
+ *               name: "Rock Concert"
+ *               description: "Live music event"
+ *               date: "2024-12-31T20:00:00.000Z"
+ *               locations: ["67c25101b3f3867b9b0908ec"]
+ *               organizer_id: "680c000cf534f14f7dd72d93"
+ *               participants: []
+ *               status: "active"
+ *               category: "Music"
+ *               price: 50
+ *               createdAt: "2024-05-10T09:00:00.000Z"
+ *               updatedAt: "2024-05-10T09:00:00.000Z"
+ *       404:
+ *         description: Event not found
+ *       400:
+ *         description: Invalid ID
  */
-router.get("/delete/:id", authenticateJWT, eventController.deleteEvent);
+router.get("/:id", eventController.getEventById);
 
 /**
  * @swagger
- * /api/events/update/{id}:
- *   post:
- *     summary: Actualizar evento por query params
+ * /api/events/{id}:
+ *   put:
+ *     summary: Update event by query params
  *     tags: [Events]
  *     security:
  *       - bearerAuth: []
@@ -143,55 +165,40 @@ router.get("/delete/:id", authenticateJWT, eventController.deleteEvent);
  *         schema: { type: string }
  *     responses:
  *       200:
- *         description: Evento actualizado
+ *         description: Event updated
  */
-router.post("/update/:id", authenticateJWT, eventController.updateEvent);
+router.put("/:id", authenticateJWT, eventController.updateEvent);
 
 /**
  * @swagger
  * /api/events/{id}:
- *   get:
- *     summary: Obtener un evento por ID
+ *   delete:
+ *     summary: Delete event by ID
  *     tags: [Events]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         schema:
- *           type: string
- *         description: ID del evento a buscar
  *     responses:
  *       200:
- *         description: Detalles completos del evento
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Event'
- *             example:
- *               _id: "680c07167e835634218013f8"
- *               name: "Concierto de Rock"
- *               description: "Evento musical en vivo"
- *               date: "2024-12-31T20:00:00.000Z"
- *               locations: ["67c25101b3f3867b9b0908ec"]
- *               organizer_id: "680c000cf534f14f7dd72d93"
- *               participants: []
- *               status: "active"
- *               category: "Música"
- *               price: 50
- *               createdAt: "2024-05-10T09:00:00.000Z"
- *               updatedAt: "2024-05-10T09:00:00.000Z"
- *       404:
- *         description: Evento no encontrado
- *       400:
- *         description: ID inválido
+ *         description: Event deleted
  */
-router.get("/:id", eventController.getEventById);
+router.delete("/:id", authenticateJWT, eventController.deleteEvent);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Transactions
+ *   description: Endpoints for transaction management
+ */
 
 /**
  * @swagger
  * /api/events/{eventId}/transactions:
- *   get:
- *     summary: Crear una nueva transacción para un evento
+ *   post:
+ *     summary: Create a new transaction for an event
  *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
@@ -201,10 +208,10 @@ router.get("/:id", eventController.getEventById);
  *         required: true
  *         schema: 
  *           type: string
- *         description: ID del evento
+ *         description: Event ID
  *     responses:
  *       201:
- *         description: Transacción creada exitosamente
+ *         description: Transaction successfully created
  *         content:
  *           application/json:
  *             example:
@@ -214,12 +221,12 @@ router.get("/:id", eventController.getEventById);
  *               currency: "eur"
  *               transaction_id: "665f4d8e1b3f3867b9b0912a"
  *       400:
- *         description: Error en los parámetros de entrada
+ *         description: Error in input parameters
  *       404:
- *         description: Recurso no encontrado (evento/usuario)
+ *         description: Resource not found (event/user)
  *       500:
- *         description: Error interno del servidor
+ *         description: Internal server error
  */
-router.get("/:eventId/transactions", authenticateJWT, eventController.createTransaction);
+router.post("/:eventId/transactions", authenticateJWT, eventController.createTransaction);
 
 module.exports = router;

@@ -69,7 +69,6 @@ const wsClients = [];
 app.locals.wsClients = wsClients; // Hacer accesible en toda la app
 
 wss.on('connection', (ws) => {
-  console.log('Nuevo cliente WebSocket conectado.');
   wsClients.push(ws);
 
   // Eliminar cliente al desconectarse
@@ -83,4 +82,5 @@ wss.on('connection', (ws) => {
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`📚 Swagger docs available at http://localhost:${PORT}/api-docs`);
 });

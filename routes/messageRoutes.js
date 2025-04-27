@@ -7,7 +7,7 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
  * @swagger
  * tags:
  *   name: Messages
- *   description: Endpoints for managing messages
+ *   description: Endpoints for message management
  */
 
 /**

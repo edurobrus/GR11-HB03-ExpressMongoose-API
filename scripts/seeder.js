@@ -146,11 +146,8 @@ if (require.main === module) {
 
   wss.on('connection', (ws) => {
     wsClients.add(ws);
-    console.log('Nuevo cliente WebSocket conectado');
-
     ws.on('close', () => {
       wsClients.delete(ws);
-      console.log('Cliente WebSocket desconectado');
     });
   });
 
