@@ -6,14 +6,14 @@ exports.getProfile = async (req, res) => {
   const userId = req.userId;
 
   if (!mongoose.Types.ObjectId.isValid(userId)) {
-    return res.status(400).json({ message: 'ID de usuario no válido' });
+    return res.status(400).json({ message: 'Invalid user ID' });
   }
 
   try {
     const user = await User.findById(userId).select('_id username email age preferences');
 
     if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
+      return res.status(404).json({ message: 'User not found' });
     }
 
     res.json({
@@ -24,9 +24,9 @@ exports.getProfile = async (req, res) => {
       preferences: user.preferences
     });
   } catch (error) {
-    console.error('Error obteniendo perfil:', error);
+    console.error('Error retrieving profile:', error);
     res.status(500).json({ 
-      message: 'Error obteniendo perfil',
+      message: 'Error retrieving profile:',
       error: error.message 
     });
   }
@@ -104,28 +104,28 @@ exports.getFriends = async (req, res) => {
 
 exports.addFriend = async (req, res) => {
   const userId = req.userId;
-  const { friendId } = req.params;
+  const { id } = req.params;
 
-  if (userId === friendId) {
+  if (userId === id) {
     return res.status(400).json({ message: "You can't add yourself as a friend" });
   }
 
   try {
 
-    if (!mongoose.Types.ObjectId.isValid(friendId)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: 'Invalid friend ID' });
     }
     
-    const friend = await User.findById(friendId);
+    const friend = await User.findById(id);
     if (!friend) return res.status(404).json({ message: 'Friend not found' });
 
     const user = await User.findById(userId);
 
-    if (user.friends.includes(friendId)) {
+    if (user.friends.includes(id)) {
       return res.status(400).json({ message: 'Already added as a friend' });
     }
 
-    user.friends.push(friendId);
+    user.friends.push(id);
     friend.friends.push(userId);
 
     await user.save();
@@ -139,26 +139,26 @@ exports.addFriend = async (req, res) => {
 
 exports.removeFriend = async (req, res) => {
   const userId = req.userId;
-  const { friendId } = req.params;
+  const { id } = req.params;
 
   try {
     
-    if (!mongoose.Types.ObjectId.isValid(friendId)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: 'Invalid friend ID' });
     }
 
     const user = await User.findById(userId);
-    const friend = await User.findById(friendId);
+    const friend = await User.findById(id);
 
     if (!user || !friend) {
       return res.status(404).json({ message: 'User or friend not found' });
     }
 
-    if (!user.friends.includes(friendId)) {
+    if (!user.friends.includes(id)) {
       return res.status(404).json({ message: 'Friend not found in your list' });
     }
 
-    user.friends = user.friends.filter(id => id.toString() !== friendId);
+    user.friends = user.friends.filter(id => id.toString() !== id);
     friend.friends = friend.friends.filter(id => id.toString() !== userId);
 
     await user.save();

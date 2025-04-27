@@ -20,7 +20,7 @@ const eventController = {
 
       // Validar parámetros obligatorios
       if (!name || !description || !date || !locations || !price || !category) {
-        return res.status(400).json({ error: 'Faltan parámetros requeridos' });
+        return res.status(400).json({ error: 'Missing required parameters' });
       }
 
       const organizer_id = req.userId;
@@ -32,7 +32,7 @@ const eventController = {
       });
       
       if (validLocations.length !== locationsArray.length) {
-        return res.status(400).json({ error: 'Ubicaciones no válidas' });
+        return res.status(400).json({ error: 'Invalid locations' });
       }
 
       // Crear nuevo evento
@@ -57,7 +57,7 @@ const eventController = {
       res.status(201).json(newEvent);
     } catch (error) {
       res.status(500).json({ 
-        error: 'Error creando evento',
+        error: 'Error creating event',
         details: error.message 
       });
     }
@@ -69,19 +69,19 @@ const eventController = {
       const { id } = req.params;
       const userId = req.userId;
 
-      if (!id) return res.status(400).json({ error: 'ID requerido' });
+      if (!id) return res.status(400).json({ error: 'ID required' });
 
       // Validar ID
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ error: 'ID de evento no válido' });
+        return res.status(400).json({ error: 'Invalid event ID' });
       }
 
       // Buscar y verificar organizador
       const event = await Event.findById(id);
-      if (!event) return res.status(404).json({ error: 'Evento no encontrado' });
+      if (!event) return res.status(404).json({ error: 'Event not found' });
       
       if (event.organizer_id.toString() !== userId) {
-        return res.status(403).json({ error: 'No autorizado para eliminar este evento' });
+        return res.status(403).json({ error: 'Not authorized to delete this event' });
       }
 
       // Eliminar evento
@@ -93,10 +93,10 @@ const eventController = {
         { $pull: { events: id } }
       );
 
-      res.json({ message: 'Evento eliminado exitosamente' });
+      res.json({ message: 'Event successfully deleted' });
     } catch (error) {
       res.status(500).json({ 
-        error: 'Error eliminando evento',
+        error: 'Error deleting event',
         details: error.message 
       });
     }
@@ -109,19 +109,19 @@ const eventController = {
       const updateData  = req.query;
       const userId = req.userId;
 
-      if (!id) return res.status(400).json({ error: 'ID requerido' });
+      if (!id) return res.status(400).json({ error: 'ID required' });
 
       // Validar ID
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ error: 'ID de evento no válido' });
+        return res.status(400).json({ error: 'Invalid event ID' });
       }
 
       // Verificar organizador
       const existingEvent = await Event.findById(id);
-      if (!existingEvent) return res.status(404).json({ error: 'Evento no encontrado' });
+      if (!existingEvent) return res.status(404).json({ error: 'Event not found' });
       
       if (existingEvent.organizer_id.toString() !== userId) {
-        return res.status(403).json({ error: 'No autorizado' });
+        return res.status(403).json({ error: 'Not authorized' });
       }
 
       // Convertir tipos de datos
@@ -139,7 +139,7 @@ const eventController = {
       res.json(updatedEvent);
     } catch (error) {
       res.status(500).json({ 
-        error: 'Error actualizando evento',
+        error: 'Error updating event',
         details: error.message 
       });
     }
@@ -149,7 +149,7 @@ const eventController = {
           const { id } = req.params;
             
             if (!mongoose.Types.ObjectId.isValid(id)) {
-                return res.status(400).json({ error: 'ID de evento no válido' });
+                return res.status(400).json({ error: 'Invalid event ID' });
             }
     
             const event = await Event.findById(id)
@@ -157,13 +157,13 @@ const eventController = {
                 .populate('locations', 'name address');
     
             if (!event) {
-                return res.status(404).json({ error: 'Evento no encontrado' });
+                return res.status(404).json({ error: 'Event not found' });
             }
     
             res.json(event);
         } catch (error) {
             res.status(500).json({ 
-                error: 'Error al obtener el evento',
+                error: 'Error retrieving the event',
                 details: error.message 
             });
         }
@@ -180,7 +180,7 @@ const eventController = {
           // 1. Validar que el evento exista y obtener su precio
           const event = await Event.findById(eventId);
           if (!event) {
-              return res.status(404).json({ message: 'Evento no encontrado' });
+              return res.status(404).json({ message: 'Event not found' });
           }
   
           // 2. Crear la sesión de pago en Stripe
@@ -232,9 +232,9 @@ const eventController = {
           });
   
       } catch (error) {
-          console.error('Error en createTransaction:', error);
+          console.error('Error in createTransaction:', error);
           res.status(500).json({ 
-              message: 'Error al procesar el pago',
+              message: 'Error processing the payment',
               error: error.message 
           });
       }

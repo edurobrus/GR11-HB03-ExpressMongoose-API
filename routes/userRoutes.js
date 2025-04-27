@@ -188,7 +188,7 @@ router.get('/me/friends', authenticateJWT, userController.getFriends);
 
 /**
  * @swagger
- * /api/users/me/friends/{friendId}:
+ * /api/users/me/friends/{id}:
  *   post:
  *     summary: Add a new friend to the user's friend list
  *     tags: [Friends]
@@ -196,7 +196,7 @@ router.get('/me/friends', authenticateJWT, userController.getFriends);
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: friendId
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
@@ -211,11 +211,11 @@ router.get('/me/friends', authenticateJWT, userController.getFriends);
  *       500:
  *         description: Error adding friend
  */
-router.post('/me/friends/:friendId', authenticateJWT, userController.addFriend);
+router.post('/me/friends/:id', authenticateJWT, userController.addFriend);
 
 /**
  * @swagger
- * /api/users/me/friends/{friendId}:
+ * /api/users/me/friends/{id}:
  *   delete:
  *     summary: Remove a friend from the user's friend list
  *     tags: [Friends]
@@ -223,7 +223,7 @@ router.post('/me/friends/:friendId', authenticateJWT, userController.addFriend);
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: friendId
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
@@ -236,6 +236,6 @@ router.post('/me/friends/:friendId', authenticateJWT, userController.addFriend);
  *       500:
  *         description: Error removing friend
  */
-router.delete('/me/friends/:friendId', authenticateJWT, userController.removeFriend);
+router.delete('/me/friends/:id', authenticateJWT, userController.removeFriend);
 
 module.exports = router;
