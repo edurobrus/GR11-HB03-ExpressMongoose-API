@@ -105,8 +105,11 @@ GR11-HB03-ExpressMongoose-API/
 ├── docs/             # Documentación Swagger
 ├── middlewares/      # Middlewares de autenticación, errores, etc.
 ├── models/           # Esquemas de Mongoose
+├── public/           # Archivos HTML y CSS del proyecto
 ├── routes/           # Rutas de la API divididas por entidad
 ├── scripts/          # Scripts para setup y populación
+├── swagger/          # Archivos para configuración de Swagger
+├── tempt/            # Datos de usuarios con contraseña sin cifrar (para testing)
 ├── index.js          # Archivo principal que lanza el servidor
 ├── .env.local.example
 ├── package.json
@@ -124,17 +127,33 @@ Aquí tienes una vista rápida. Para detalles y pruebas, usa Swagger.
 | GET    | `/api/users/me`                        | Obtiene tu perfil                        |
 | PUT    | `/api/users/me`                        | Actualiza tu perfil                      |
 | GET    | `/api/users/me/friends`                | Lista tus amigos                         |
-| POST   | `/api/users/me/friends`                | Añade un nuevo amigo                     |
-| DELETE | `/api/users/me/friends/:friendId`      | Elimina a un amigo                       |
+| POST   | `/api/users/me/friends:id`             | Añade un nuevo amigo                     |
+| DELETE | `/api/users/me/friends/:id`            | Elimina a un amigo                       |
+| POST   | `/api/messages`                        | Enviar un nuevo mensaje                  |
 | GET    | `/api/messages/sent`                   | Ver mensajes enviados                    |
 | GET    | `/api/messages/received`               | Ver mensajes recibidos                   |
-| POST   | `/api/messages`                        | Enviar un nuevo mensaje                  |
+| PATCH  | `/api/messages/status/:id`             | Actualizar el estado de un mensaje       |
+| DELETE | `/api/messages/:id`                    | Eliminar un mensaje                      |
 | GET    | `/api/locations`                       | Lista todas las localizaciones           |
+| GET    | `/api/locations/nearby`                | Obtener las localizaciones cercanas      |
 | GET    | `/api/locations/top-rated`             | Top 5 localizaciones por puntuación      |
+| GET    | `/api/locations/most-voted`            | Top 5 localizaciones más votadas         |
 | GET    | `/api/locations/:id`                   | Detalles de una localización             |
+| GET    | `/api/locations/:id/rating`            | Votar por una localización               |
+| GET    | `/api/cities`                          | Lista todas las ciudades                 |
 | GET    | `/api/cities/nearby`                   | Lista ciudades cercanas                  |
+| GET    | `/api/cities/:id`                      | Detalles de una ciudad                   |
+| GET    | `/api/restaurants`                     | Lista todas los restaurantes             |
 | GET    | `/api/restaurants/nearby`              | Lista restaurantes cercanos              |
+| GET    | `/api/restaurants/:id`                 | Detalles de un restaurante               |
+| GET    | `/api/achievements`                    | Lista de logros                          |
 | GET    | `/api/achievements/user`               | Logros del usuario actual                |
+| GET    | `/api/achievements/:id`                | Detalles de un logro                     |
+| POST   | `/api/events`                          | Crea un nuevo evento                     |
+| GET    | `/api/events/:id`                      | Obtiene los detalles de un evento        |
+| PUT    | `/api/events/:id`                      | Actualiza los detalles de un evento      |
+| DELETE | `/api/events/:id`                      | Elimina un evento                        |
+| GET    | `/api/transactions/:id`                | Ver detalles de una transacción          |
 | POST   | `/api/populate`                        | Importa datos de prueba                  |
 
 ## 🧑‍💻 Contribución
