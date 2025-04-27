@@ -72,34 +72,43 @@ router.get('/me', authenticateJWT, userController.getProfile);
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               username:
- *                 type: string
- *               password:
- *                 type: string
- *               age:
- *                 type: integer
- *               email:
- *                 type: string
- *                 format: email
- *               preferences:
- *                 type: object
- *                 properties:
- *                   theme:
- *                     type: string
- *                     example: auto
- *                   language:
- *                     type: string
- *                     example: en
- *                   notifications:
- *                     type: string
- *                     example: enabled
+ *     parameters:
+ *       - in: query
+ *         name: username
+ *         schema:
+ *           type: string
+ *         description: New username
+ *       - in: query
+ *         name: password
+ *         schema:
+ *           type: string
+ *         description: New password
+ *       - in: query
+ *         name: age
+ *         schema:
+ *           type: integer
+ *         description: New age
+ *       - in: query
+ *         name: email
+ *         schema:
+ *           type: string
+ *           format: email
+ *         description: New email
+ *       - in: query
+ *         name: preferences.theme
+ *         schema:
+ *           type: string
+ *         description: Preferred theme (e.g., auto)
+ *       - in: query
+ *         name: preferences.language
+ *         schema:
+ *           type: string
+ *         description: Preferred language (e.g., en)
+ *       - in: query
+ *         name: preferences.notifications
+ *         schema:
+ *           type: string
+ *         description: Notification settings (e.g., enabled)
  *     responses:
  *       200:
  *         description: User updated successfully
@@ -179,22 +188,19 @@ router.get('/me/friends', authenticateJWT, userController.getFriends);
 
 /**
  * @swagger
- * /api/users/me/friends:
+ * /api/users/me/friends/{friendId}:
  *   post:
  *     summary: Add a new friend to the user's friend list
  *     tags: [Friends]
  *     security:
  *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               friendId:
- *                 type: string
- *                 description: The ID of the user to add as a friend
+ *     parameters:
+ *       - in: path
+ *         name: friendId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the user to add as a friend
  *     responses:
  *       200:
  *         description: Friend added successfully
@@ -205,7 +211,7 @@ router.get('/me/friends', authenticateJWT, userController.getFriends);
  *       500:
  *         description: Error adding friend
  */
-router.post('/me/friends', authenticateJWT, userController.addFriend);
+router.post('/me/friends/:friendId', authenticateJWT, userController.addFriend);
 
 /**
  * @swagger

@@ -40,14 +40,23 @@ exports.updateUser = async (req, res) => {
   }
 
   try {
-    const { username, password, age, email, preferences } = req.body;
+    const { username, password, age, email, 
+            'preferences.theme': theme,
+            'preferences.language': language,
+            'preferences.notifications': notifications } = req.query;
 
     const updatedFields = {};
     if (username !== undefined) updatedFields.username = username;
     if (password !== undefined) updatedFields.password = password;
-    if (age !== undefined) updatedFields.age = age;
+    if (age !== undefined) updatedFields.age = Number(age);
     if (email !== undefined) updatedFields.email = email;
-    if (preferences !== undefined && typeof preferences === 'object') {
+
+    const preferences = {};
+    if (theme !== undefined) preferences.theme = theme;
+    if (language !== undefined) preferences.language = language;
+    if (notifications !== undefined) preferences.notifications = notifications;
+
+    if (Object.keys(preferences).length > 0) {
       updatedFields.preferences = preferences;
     }
 
@@ -95,13 +104,18 @@ exports.getFriends = async (req, res) => {
 
 exports.addFriend = async (req, res) => {
   const userId = req.userId;
-  const { friendId } = req.body;
+  const { friendId } = req.params;
 
   if (userId === friendId) {
     return res.status(400).json({ message: "You can't add yourself as a friend" });
   }
 
   try {
+
+    if (!mongoose.Types.ObjectId.isValid(friendId)) {
+      return res.status(400).json({ message: 'Invalid friend ID' });
+    }
+    
     const friend = await User.findById(friendId);
     if (!friend) return res.status(404).json({ message: 'Friend not found' });
 
@@ -128,6 +142,11 @@ exports.removeFriend = async (req, res) => {
   const { friendId } = req.params;
 
   try {
+    
+    if (!mongoose.Types.ObjectId.isValid(friendId)) {
+      return res.status(400).json({ message: 'Invalid friend ID' });
+    }
+
     const user = await User.findById(userId);
     const friend = await User.findById(friendId);
 

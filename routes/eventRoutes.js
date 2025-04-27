@@ -12,6 +12,47 @@ const authenticateJWT = require('../middlewares/authenticateJWT');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Event:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           example: "680c07167e835634218013f8"
+ *         name:
+ *           type: string
+ *         description:
+ *           type: string
+ *         date:
+ *           type: string
+ *           format: date-time
+ *         locations:
+ *           type: array
+ *           items:
+ *             type: string
+ *         organizer_id:
+ *           type: string
+ *         participants:
+ *           type: array
+ *           items:
+ *             type: string
+ *         status:
+ *           type: string
+ *         category:
+ *           type: string
+ *         price:
+ *           type: number
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @swagger
  * /api/events/:
  *   post:
  *     summary: Create a new event using query params
@@ -181,9 +222,20 @@ router.put("/:id", authenticateJWT, eventController.updateEvent);
  *       - in: path
  *         name: id
  *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the event to delete
  *     responses:
  *       200:
  *         description: Event deleted
+ *       400:
+ *         description: Invalid event ID
+ *       403:
+ *         description: Not authorized to delete the event
+ *       404:
+ *         description: Event not found
+ *       500:
+ *         description: Internal server error
  */
 router.delete("/:id", authenticateJWT, eventController.deleteEvent);
 

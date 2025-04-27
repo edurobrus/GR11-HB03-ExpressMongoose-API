@@ -66,7 +66,7 @@ const eventController = {
   // Eliminar evento por query param
   deleteEvent: async (req, res) => {
     try {
-      const { id } = req.query;
+      const { id } = req.params;
       const userId = req.userId;
 
       if (!id) return res.status(400).json({ error: 'ID requerido' });
@@ -81,7 +81,7 @@ const eventController = {
       if (!event) return res.status(404).json({ error: 'Evento no encontrado' });
       
       if (event.organizer_id.toString() !== userId) {
-        return res.status(403).json({ error: 'No autorizado' });
+        return res.status(403).json({ error: 'No autorizado para eliminar este evento' });
       }
 
       // Eliminar evento
@@ -105,7 +105,8 @@ const eventController = {
   // Actualizar evento por query param
   updateEvent: async (req, res) => {
     try {
-      const { id, ...updateData } = req.query;
+      const { id } = req.params;
+      const updateData  = req.query;
       const userId = req.userId;
 
       if (!id) return res.status(400).json({ error: 'ID requerido' });
@@ -145,14 +146,13 @@ const eventController = {
   },
     getEventById: async (req, res) => {
         try {
-            const eventId = req.params.id;
-            const userId = req.userId;
+          const { id } = req.params;
             
-            if (!mongoose.Types.ObjectId.isValid(eventId)) {
+            if (!mongoose.Types.ObjectId.isValid(id)) {
                 return res.status(400).json({ error: 'ID de evento no válido' });
             }
     
-            const event = await Event.findById(eventId)
+            const event = await Event.findById(id)
                 .populate('organizer_id', 'name email')
                 .populate('locations', 'name address');
     
@@ -173,6 +173,10 @@ const eventController = {
           const { eventId } = req.params;
           const userId = req.userId;
   
+          if (!mongoose.Types.ObjectId.isValid(eventId)) {
+            return res.status(400).json({ message: 'Invalid event ID' });
+          }
+
           // 1. Validar que el evento exista y obtener su precio
           const event = await Event.findById(eventId);
           if (!event) {

@@ -32,7 +32,7 @@ exports.createMessage = async (req, res) => {
     try {
         const [receiver, sender] = await Promise.all([
             User.findById(receiver_id),
-            User.findById(userId, 'username avatar') // Solo username y avatar del sender
+            User.findById(userId, 'username avatar')
         ]);
         if (!receiver) {
             return res.status(404).json({ error: 'Receiver user not found' });
@@ -86,7 +86,7 @@ exports.getReceivedMessages = async (req, res) => {
 
 exports.updateMessageStatus = async (req, res) => {
     const { id } = req.params;
-    const { status } = req.body;
+    const { status } = req.query;
     const userId = req.userId;
 
     if (!status) {

@@ -125,18 +125,12 @@ router.get('/received', authenticateJWT, messageController.getReceivedMessages);
  *         schema:
  *           type: string
  *         description: ID of the message to update
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - status
- *             properties:
- *               status:
- *                 type: string
- *                 description: New status of the message (e.g., read, sent)
+ *       - in: query
+ *         name: status
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: New status of the message (e.g., read, sent)
  *     responses:
  *       200:
  *         description: Message status updated
